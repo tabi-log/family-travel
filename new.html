@@ -464,6 +464,8 @@ const clean = s => esc(s)
   .replace(EMOJI, '');
 const plain = s => String(s).replace(/（✅?已預約）/, '').replace(/⚠️\s?/g, '').replace(EMOJI, '').trim();
 const isBooked = s => /已預約|已訂/.test(s);
+// 新版首頁大圖：先寫在這裡試看，不動 data.js（正式換版時再搬進 SITE.home.hero）
+const NEW_HOME_HERO = {img:'81', pos:40, x:62, cap:'從東本願寺看京都塔'};
 
 const dayCfg = n => (SITE.days || {})[n] || {must:[], tips:[]};
 const areaCfg = a => (SITE.areas || {})[a] || {id:'area', img:'', cap:'', days:''};
@@ -506,7 +508,7 @@ window.addEventListener('scroll', paintNav, {passive:true});
 // 左照片、右奶油黃色塊的大圖區
 function splitHero(o){
   return `<section class="split${o.short ? ' short' : ''}${o.inset ? ' has-inset' : ''}">
-    <figure class="ph">${pic('f', o.img, o.alt || '', fit(o.pos), o.label || '')}${o.img && o.cap ? `<figcaption>${esc(o.cap)}</figcaption>` : ''}</figure>
+    <figure class="ph">${pic('f', o.img, o.alt || '', o.x == null ? fit(o.pos) : `object-position:${o.x}% ${o.pos}%`, o.label || '')}${o.img && o.cap ? `<figcaption>${esc(o.cap)}</figcaption>` : ''}</figure>
     <div class="panel">
       ${o.kicker ? `<p class="kicker">${o.kicker}</p>` : ''}
       <h1>${o.title}</h1>
@@ -586,21 +588,21 @@ function renderHome(){
   const total = {d:0, p:0};
   TRIPS.forEach(t => { total.d += t.D.days.length; total.p += t.D.places.length; });
   const done = TRIPS.filter(t => t.status !== 'planning');
-  const h = G.home.hero;
+  const h = NEW_HOME_HERO || G.home.hero;
   // 右下角小圖與介紹區用已完成旅程的封面
-  const covers = done.map(t => t.S.card).filter(c => c && c.img);
+  const covers = done.map(t => t.S.card).filter(c => c && c.img && c.img !== h.img);
   const next = TRIPS.find(t => t.status === 'planning');
   const cards = list.map(tripCard).join('');
   trip = null;
   quotes = [];
   const photos = PHOTOS.filter(p => p.trip).slice(0, 16);
   app.innerHTML = splitHero({
-    img: h.img, pos: h.pos, cap: h.cap, alt: h.cap,
+    img: h.img, pos: h.pos, x: h.x, cap: h.cap, alt: h.cap,
     kicker: 'Family Travel Journal',
     title: `<span class="en">Our Family,<br>One Route</span><span class="zh">${esc(G.title)}</span>`,
     lead: esc(G.tagline) + '<br>每一趟都記下每天的行程、集合時間、交通方式，還有吃過、逛過的地方。',
     acts: `<a class="btn" href="#trips">看所有旅程</a>${next ? `<a class="btn ghost" href="#t-${next.id}">下一站：${esc(next.name)}</a>` : ''}`,
-    inset: covers[0]
+    inset: covers[1] || covers[0]
   }) + `
   <div class="wrap">
     <div class="stats"><div><b>${done.length}</b><span>趟旅程</span></div><div><b>${total.d}</b><span>天</span></div><div><b>${total.p}</b><span>個地點</span></div><div><b>${PHOTOS.length}</b><span>張照片</span></div></div>
@@ -610,7 +612,7 @@ function renderHome(){
     <div class="trips">${cards}</div>
   </div></section>
   <section class="intro">
-    <div class="im">${covers[1] ? pic('f', covers[1].img, '', fit(covers[1].pos), '', true) : pic('f', '', '', '', G.title)}</div>
+    <div class="im">${covers[0] ? pic('f', covers[0].img, '', fit(covers[0].pos), '', true) : pic('f', '', '', '', G.title)}</div>
     <div class="tx">
       <p class="kicker">About Us</p>
       <h2>Designed for<br>Family Time<span class="zh">一家四口，一趟一條路線</span></h2>
