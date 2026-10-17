@@ -28,6 +28,21 @@
   --bg:#FAF4EF; --paper:#FFFCF9; --butter:#E8B79E; --butter-2:#F5DDD0; --line:#E6D3C6;
   --ink:#3B2622; --mute:#7E6560; --soft:#A89089; --sage:#9A6B57; --rust:#A8432C; --rust-soft:#F6DED3;
 }
+/* 抹茶苔綠：取自京都寺院庭園、植物園的綠意 */
+:root[data-palette="matcha"]{
+  --bg:#F7F6EF; --paper:#FFFFFB; --butter:#C9D3AE; --butter-2:#E4E9D3; --line:#DCDDCB;
+  --ink:#2C3324; --mute:#646B58; --soft:#959A86; --sage:#6F7F55; --rust:#A4552F; --rust-soft:#F2E0D3; --sage-soft:#E4E9D3;
+}
+/* 燕麥奶茶：低彩度的米杏色，最安靜、最襯照片 */
+:root[data-palette="latte"]{
+  --bg:#F8F5F0; --paper:#FFFFFF; --butter:#E3D3BD; --butter-2:#EFE6D9; --line:#E2D8CA;
+  --ink:#34291F; --mute:#76695D; --soft:#A2968A; --sage:#8F7B66; --rust:#9C5A3C; --rust-soft:#F1E1D6;
+}
+/* 暮色紫灰：取自傍晚天空與夜景燈光的紫灰 */
+:root[data-palette="dusk"]{
+  --bg:#F6F4F5; --paper:#FFFFFF; --butter:#D5CCDB; --butter-2:#E8E2EB; --line:#DDD7DD;
+  --ink:#2B2533; --mute:#665E6E; --soft:#9A92A0; --sage:#6E6380; --rust:#B0563F; --rust-soft:#F3E0DA; --sage-soft:#E8E2EB;
+}
 /* 海霧藍：取自港口、海面與傍晚天空的藍灰 */
 :root[data-palette="sea"]{
   --bg:#F5F5F1; --paper:#FFFFFF; --butter:#C6D6DC; --butter-2:#E1EAEC; --line:#D5DCDC;
@@ -426,8 +441,8 @@ footer .copy{border-top:1px solid color-mix(in srgb,var(--butter) 30%,transparen
 </div>
 
 <script>
-// 試看色票：網址加 ?c=clay 或 ?c=sea
-try { const c = new URLSearchParams(location.search).get('c'); if (/^(clay|sea)$/.test(c)) document.documentElement.dataset.palette = c; } catch (e) {}
+// 試看色票：網址加 ?c=clay／sea／matcha／latte／dusk
+try { const c = new URLSearchParams(location.search).get('c'); if (/^(clay|sea|matcha|latte|dusk)$/.test(c)) document.documentElement.dataset.palette = c; } catch (e) {}
 </script>
 <script src="data.js"></script>
 <script>
