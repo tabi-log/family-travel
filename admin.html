@@ -418,6 +418,7 @@ const SECTIONS = {
         ${txt('路線', 'SITE.route')}
         <div class="row2">${txt('人數', 'SITE.people', {type:'number', num:true})}${txt('車資幣別符號', 'SITE.cur', {ph:'¥'})}</div>
         ${txt('景點頁說明（例如素食標示）', 'SITE.placeNote')}
+        ${area('旅行回憶（總覽頁開頭的一段話，可換行；空白就不顯示）', 'SITE.memo', 4)}
       </div>
       <div class="box" data-preview="places"><h3>景點區域</h3>
         <p class="hint">改區域名稱時，屬於這個區域的地點和天數會一起更新。</p>
@@ -473,7 +474,8 @@ const SECTIONS = {
         ${c.tips.map((t, j) => `<div class="item"><div class="item-h"><span class="t">提醒 ${j + 1}</span>${listBtns(`${cfg}.tips`, j, c.tips.length)}</div>${area('', `${cfg}.tips.${j}`)}</div>`).join('')}
         <button class="btn" type="button" data-act="add" data-list="${cfg}.tips" data-tpl="tip">＋ 新增提醒</button>
       </div>
-      <div class="box" data-preview="day-${d.day}">${area('補充（小字）', `${cfg}.foot`, 2)}</div>`;
+      <div class="box" data-preview="day-${d.day}">${area('補充（小字）', `${cfg}.foot`, 2)}</div>
+      <div class="box" data-preview="day-${d.day}"><h3>這天的回憶</h3><p class="hint">旅程結束後寫一兩句，會顯示在照片日記和當天頁面上方；空白就不顯示。</p>${area('', `${cfg}.memo`, 3)}</div>`;
   },
   moves(){
     if (!data.D.days.length) return SECTIONS.days();

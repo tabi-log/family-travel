@@ -201,7 +201,7 @@ footer .copy{border-top:1px solid color-mix(in srgb,var(--butter) 30%,transparen
 .anchor p{font-size:15px;margin-top:2px}
 
 /* 區域卡片 */
-.areas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:clamp(16px,2vw,24px)}
+.areas{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:clamp(16px,2vw,24px)}
 .areac{display:block;text-decoration:none}
 .areac .im{aspect-ratio:3/4;overflow:hidden}
 .areac img,.areac .noimg{width:100%;height:100%;object-fit:cover;transition:transform .7s}
@@ -314,6 +314,74 @@ footer .copy{border-top:1px solid color-mix(in srgb,var(--butter) 30%,transparen
 .lb [data-lb="-1"]{left:14px;top:50%;transform:translateY(-50%)}
 .lb [data-lb="1"]{right:14px;top:50%;transform:translateY(-50%)}
 
+/* 首頁：下一趟旅程 */
+.nextc{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);background:var(--butter);text-decoration:none;border-radius:10px;overflow:hidden}
+.nextc .im{position:relative;min-height:clamp(260px,30vw,420px);background:var(--sage)}
+.nextc .im>*{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.nextc .tri{display:grid;grid-template-columns:repeat(3,1fr)}
+.nextc .tri img{width:100%;height:100%;object-fit:cover}
+.nextc .tx{padding:clamp(28px,4vw,56px);display:flex;flex-direction:column;justify-content:center;gap:10px}
+.nextc h3{font-family:var(--f-serif);font-weight:900;font-size:clamp(34px,4.6vw,60px)}
+.nextc .sub{font-family:var(--f-mono);font-size:14px;color:var(--mute)}
+.nextc .body{font-size:16px;margin-top:6px;max-width:28em}
+.nextc .btn{align-self:flex-start;margin-top:14px}
+.nextc:hover .btn{background:transparent;color:var(--ink)}
+
+/* 旅行回憶文字 */
+.memo-sec{padding-block:clamp(48px,7vw,88px);background:var(--paper)}
+.memo{margin:16px 0 0;font-family:var(--f-serif);font-weight:500;font-size:clamp(20px,2.4vw,28px);line-height:1.8;max-width:34em;white-space:pre-line}
+
+/* 每日照片日記 */
+.diaries{display:grid;gap:clamp(56px,8vw,104px)}
+.diary{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.4fr);gap:clamp(24px,4vw,56px);align-items:start}
+.diary.rest{margin-top:clamp(56px,8vw,104px)}
+.diary header{position:sticky;top:calc(var(--navh) + 24px);display:flex;flex-direction:column;gap:6px}
+.diary .num{font-family:var(--f-display);font-style:italic;font-size:clamp(64px,8vw,104px);line-height:.9}
+.diary small{font-family:var(--f-mono);font-size:13px;color:var(--mute);letter-spacing:.06em}
+.diary h3{font-family:var(--f-serif);font-weight:700;font-size:clamp(24px,2.6vw,32px);margin:4px 0 8px}
+.diary .dmemo{font-family:var(--f-serif);font-size:17px;line-height:1.9;border-left:2px solid var(--sage);padding-left:14px;margin-bottom:14px;white-space:pre-line}
+.diary .more{align-self:flex-start}
+.dg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.dg button{position:relative;padding:0;border:0;overflow:hidden;aspect-ratio:1/1;background:var(--butter-2);border-radius:6px}
+.dg button:first-child{grid-column:span 2;grid-row:span 2}
+.dg img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.dg button:hover img{transform:scale(1.05)}
+.dg span{position:absolute;left:8px;bottom:8px;max-width:calc(100% - 16px);background:var(--bg);font-family:var(--f-mono);font-size:12px;padding:1px 10px;border-radius:999px;text-align:left;opacity:0;transition:opacity .3s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dg button:first-child span,.dg button:hover span,.dg button:focus-visible span{opacity:1}
+.dg .plus{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--ink) 55%,transparent);color:#fff;font-family:var(--f-display);font-size:clamp(24px,3vw,36px);font-weight:400}
+.dnone{font-family:var(--f-mono);font-size:14px;color:var(--mute);padding:40px;text-align:center;border:1px dashed var(--line)}
+
+.dlist a{display:grid;grid-template-columns:72px 1fr auto;gap:16px;align-items:center;padding:16px 4px;border-bottom:1px solid var(--line);text-decoration:none;transition:background .2s}
+.dlist a:hover{background:var(--butter-2)}
+.dlist .n{font-family:var(--f-display);font-style:italic;font-size:36px;line-height:1}
+.dlist small{display:block;font-family:var(--f-mono);font-size:13px;color:var(--mute)}
+.dlist b{font-family:var(--f-serif);font-size:19px}
+.dlist .go{font-family:var(--f-mono);color:var(--mute)}
+.tlh{font-family:var(--f-serif);font-weight:700;font-size:22px;margin-bottom:14px}
+
+/* 給媽媽看：字放大 */
+.mom{background:var(--paper)}
+.mom.veg{background:var(--bg)}
+
+.meetday{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.2fr);gap:24px 48px;padding:28px 0;border-bottom:1px solid var(--line)}
+.meetday .mh small{font-family:var(--f-mono);font-size:14px;color:var(--mute);letter-spacing:.1em}
+.meetday .mh h3{font-family:var(--f-serif);font-weight:900;font-size:clamp(28px,3vw,36px)}
+.meetday .mh p{font-size:18px;color:var(--mute);margin-top:4px}
+.meetday .ml{display:grid;gap:12px}
+.meetday .mr{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:baseline;background:var(--butter-2);border-radius:12px;padding:14px 22px}
+.meetday .mr b{font-family:var(--f-display);font-weight:600;font-size:clamp(34px,4vw,48px);line-height:1;color:var(--ink)}
+.meetday .mr span{font-size:clamp(18px,1.8vw,21px);line-height:1.6}
+.meetday .mnone{font-size:18px;color:var(--mute);padding:14px 0}
+.vegarea+.vegarea{margin-top:40px}
+.vegarea h3{font-family:var(--f-serif);font-weight:900;font-size:clamp(24px,2.6vw,30px);display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--ink);padding-bottom:10px}
+.vegarea h3 span{font-family:var(--f-mono);font-size:14px;font-weight:400;color:var(--mute)}
+.vegs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:14px;margin-top:16px}
+.vegc{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px 22px;display:flex;flex-direction:column;gap:8px}
+.vegc b{font-family:var(--f-serif);font-weight:700;font-size:22px}
+.vegc p{font-size:17px;line-height:1.75;color:var(--ink)}
+.vegc a{align-self:flex-start;margin-top:auto;font-family:var(--f-mono);font-size:15px;border:1.2px solid var(--ink);border-radius:999px;padding:6px 16px;text-decoration:none}
+.vegc a:hover{background:var(--ink);color:var(--butter)}
+
 /* 手機底部分頁列 */
 .tabbar{display:none}
 
@@ -336,6 +404,11 @@ footer .copy{border-top:1px solid color-mix(in srgb,var(--butter) 30%,transparen
   .split.has-inset .panel{padding-bottom:clamp(40px,6vw,88px)}
   .split .inset{display:none}
   .dayrow,.dlayout,.pd{grid-template-columns:1fr}
+  .nextc,.diary,.meetday{grid-template-columns:1fr}
+  .nextc .im{min-height:0;aspect-ratio:16/9}
+  .diary header{position:static;flex-direction:row;flex-wrap:wrap;align-items:baseline;column-gap:16px}
+  .diary header>div{flex:1;min-width:220px}
+  .meetday{gap:14px}
   .dayrow:nth-child(even) .ph{order:0}
   .side{position:static}
   .sec-h{grid-template-columns:1fr}
@@ -349,6 +422,10 @@ footer .copy{border-top:1px solid color-mix(in srgb,var(--butter) 30%,transparen
   .logo{padding:2px 14px 4px}
   .logo small{display:none}
   .trip .ph{aspect-ratio:4/3}
+  .dg{grid-template-columns:repeat(3,1fr);gap:6px}
+  .dg button:first-child{grid-column:span 3;grid-row:auto;aspect-ratio:4/3}
+  .meetday .mr{padding:12px 16px;gap:14px}
+  .dlist a{grid-template-columns:52px 1fr auto}
   .quote .ctl{margin-top:28px}
   .stats{grid-template-columns:repeat(2,1fr)}
   .stats div:nth-child(3){border-left:0}
@@ -519,7 +596,7 @@ function tripCard(t, k){
     <div class="ph">${triptych(t)}${plan ? '<span class="badge">規劃中</span>' : ''}${SITE.card.img && SITE.code ? `<span class="code">${esc(SITE.code)}</span>` : ''}</div>
     <div class="cap"><h3>${esc(t.name)}${SITE.route ? `<small>${esc(SITE.route)}</small>` : ''}</h3><span class="no">${String(k + 1).padStart(2, '0')}</span></div>
     <p class="tmeta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>${esc(D.info.subtitle)}</span><span>/</span><span>${D.days.length || '—'} DAYS・${D.places.length} PLACES</span></p>
-    <span class="read">${plan ? '看規劃進度' : '看這趟旅程'} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M14 7l5 5-5 5"/></svg></span>
+    <span class="read">${plan ? '看行前資訊' : '翻照片日記'} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M14 7l5 5-5 5"/></svg></span>
   </a>`;
 }
 
@@ -553,16 +630,66 @@ function paintQuote(){
   document.getElementById('q-n').textContent = `${String(qAt + 1).padStart(2, '0')} / ${String(quotes.length).padStart(2, '0')}`;
 }
 
+// 素食判斷：說明或標籤有「🌱／媽媽可吃／素食可」，且沒有寫「不能吃」
+const isVeg = p => /🌱|媽媽可吃|素食可/.test(`${p.desc || ''} ${p.tag || ''}`) && !/✕|不能吃/.test(p.desc || '');
+
+// 照片日記：依照片連結的地點，找出是哪一天去的（先比對當天行程文字，再比對當天所在區域）
+function diaryPhotos(){
+  const norm = s => String(s || '').replace(/[\s・·／/（）()]/g, '');
+  const dayText = d => { const c = dayCfg(d.day); return norm([d.title, ...d.items.map(i => i.event), ...(c.tips || []), c.hint, c.cap, ...(c.must || []).map(m => m[1])].join(' ')); };
+  const texts = D.days.map(d => ({d, t: dayText(d)}));
+  const byDay = {}, rest = [];
+  D.days.forEach(d => { byDay[d.day] = []; });
+  tripPhotos(trip.id).forEach(ph => {
+    let day = ph.day && byDay[ph.day] ? ph.day : null;
+    if (!day && ph.p){
+      const keys = [ph.p, ...ph.p.split(/[\s／/・]/)].filter(k => k && k.length >= 2).map(norm);
+      const hit = texts.find(x => keys.some(k => x.t.includes(k)));
+      const place = D.places.find(p => p.n === ph.p);
+      day = hit ? hit.d.day : place ? (D.days.find(d => dayCfg(d.day).area === place.area) || {}).day : null;
+    }
+    (day ? byDay[day] : rest).push(ph);
+  });
+  // 每天的橫幅照片也放進當天（沒放過的話）
+  D.days.forEach(d => { const c = dayCfg(d.day); if (c.img && !byDay[d.day].some(p => p.n === c.img)) byDay[d.day].unshift({n:c.img, c:c.cap || ''}); });
+  return {byDay, rest};
+}
+
+// 一天的照片拼貼：第一張放大，最多顯示 9 張，第 9 張蓋上「+N」
+function diaryGrid(list, start){
+  const shown = list.slice(0, 9), more = list.length - shown.length;
+  return `<div class="dg">${shown.map((ph, k) => `<button type="button" data-ph="${start + k}" aria-label="放大照片：${esc(ph.c)}"><img src="${imgSrc(k === 0 ? 'f' : 't', ph.n)}" alt="${esc(ph.c)}" loading="lazy">${k === shown.length - 1 && more > 0 ? `<b class="plus">+${more}</b>` : ph.c ? `<span>${esc(ph.c)}</span>` : ''}</button>`).join('')}</div>`;
+}
+
+// 給媽媽看：每天的集合時間（集合類行程＋必須準時），依時間排序、去掉重複
+function meetTimes(d){
+  const c = dayCfg(d.day), seen = new Set(), rows = [];
+  [...keysOf(d).map(k => [k.time, plain(k.event).replace(/^集合：/, '')]), ...(c.must || [])].forEach(([t, x]) => {
+    if (!t || seen.has(t)) return; seen.add(t); rows.push([t, x]);
+  });
+  return rows.sort((a, b) => String(a[0]).localeCompare(String(b[0])));
+}
+
 function renderHome(){
-  const list = sortedTrips();
   const total = {d:0, p:0};
   TRIPS.forEach(t => { total.d += t.D.days.length; total.p += t.D.places.length; });
-  const done = TRIPS.filter(t => t.status !== 'planning');
+  const done = sortedTrips().filter(t => t.status !== 'planning');
+  const plans = sortedTrips().filter(t => t.status === 'planning');
   const h = G.home.hero;
   // 右下角小圖與介紹區用已完成旅程的封面
   const covers = done.map(t => t.S.card).filter(c => c && c.img && c.img !== h.img);
-  const next = TRIPS.find(t => t.status === 'planning');
-  const cards = list.map(tripCard).join('');
+  const next = plans[0];
+  const nextCard = next ? (useTrip(next.id), `<a class="nextc" href="#${T()}">
+      <div class="im">${triptych(next)}</div>
+      <div class="tx">
+        <p class="kicker">Next Trip · 下一趟旅程</p>
+        <h3>${esc(next.name)}</h3>
+        <p class="sub">${esc(D.info.subtitle)}${SITE.route ? '　' + esc(SITE.route) : ''}</p>
+        <p class="body">${D.days.length ? `已排好 ${D.days.length} 天行程，集合時間和媽媽可以吃的店都整理在裡面。` : '行程還在規劃中，排好後這裡會出現每天的集合時間和素食店家。'}</p>
+        <span class="btn">看行前資訊</span>
+      </div>
+    </a>`) : '';
+  const cards = done.map(tripCard).join('');
   trip = null;
   quotes = [];
   const photos = PHOTOS.filter(p => p.trip).slice(0, 16);
@@ -570,15 +697,16 @@ function renderHome(){
     img: h.img, pos: h.pos, x: h.x, cap: h.cap, alt: h.cap,
     kicker: 'Family Travel Journal',
     title: `<span class="en">Our Family,<br>One Route</span><span class="zh">${esc(G.title)}</span>`,
-    lead: esc(G.tagline) + '<br>每一趟都記下每天的行程、集合時間、交通方式，還有吃過、逛過的地方。',
-    acts: `<a class="btn" href="#trips">看所有旅程</a>${next ? `<a class="btn ghost" href="#t-${next.id}">下一站：${esc(next.name)}</a>` : ''}`,
+    lead: esc(G.tagline) + '<br>去過的旅程留成回憶，下一趟的行程也放在這裡，大家出發前一起看。',
+    acts: `${next ? `<a class="btn" href="#t-${next.id}">下一站：${esc(next.name)}</a>` : ''}<a class="btn ghost" href="#trips">翻翻旅行回憶</a>`,
     inset: covers[1] || covers[0]
   }) + `
   <div class="wrap">
     <div class="stats"><div><b>${done.length}</b><span>趟旅程</span></div><div><b>${total.d}</b><span>天</span></div><div><b>${total.p}</b><span>個地點</span></div><div><b>${PHOTOS.length}</b><span>張照片</span></div></div>
   </div>
+  ${nextCard ? `<section class="sec" style="padding-bottom:0"><div class="wrap">${nextCard}</div></section>` : ''}
   <section class="sec" id="trips" style="scroll-margin-top:var(--navh)"><div class="wrap">
-    <div class="sec-h"><div><p class="kicker">Our Journeys</p><h2>Every Trip, <i>One Line</i></h2></div><p>點進每一趟，看每日路線、重要時間與景點店家。</p></div>
+    <div class="sec-h"><div><p class="kicker">Memories</p><h2>Every Trip, <i>One Line</i></h2></div><p>去過的旅程，點進去翻每天的照片日記。</p></div>
     <div class="trips">${cards}</div>
   </div></section>
   <section class="intro">
@@ -587,7 +715,7 @@ function renderHome(){
       <p class="kicker">About Us</p>
       <h2>Designed for<br>Family Time<span class="zh">一家四口，一趟一條路線</span></h2>
       <p class="body">${esc(G.tagline)}出發前一起排行程，旅途中照著看板走，回來後把照片和吃過的店收進這裡。</p>
-      <ul>${list.map(t => `<li><b>${esc(t.status === 'planning' ? 'Next' : t.year)}</b><span>${esc(t.name)}${t.S.route ? '　' + esc(t.S.route) : ''}</span></li>`).join('')}</ul>
+      <ul>${sortedTrips().map(t => `<li><b>${esc(t.status === 'planning' ? 'Next' : t.year)}</b><span>${esc(t.name)}${t.S.route ? '　' + esc(t.S.route) : ''}</span></li>`).join('')}</ul>
       <a class="btn" href="#trips">開始瀏覽</a>
     </div>
   </section>
@@ -603,6 +731,93 @@ function renderTrip(){
   const plan = trip.status === 'planning';
   const facts = D.info.highlights.map(h => `<div><small>${esc(h.label)}</small><b>${esc(h.value)}</b></div>`).join('');
   const info = (SITE.info || []).filter(x => x.k || x.v);
+  const areas = D.areaOrder.map(a => {
+    const A = areaCfg(a), n = D.places.filter(p => p.area === a).length;
+    if (!n) return '';
+    return `<a class="areac" href="#${T()}-places-${A.id}"><div class="im">${pic('f', A.img, A.cap, '', a, true)}</div><div class="t"><h3>${esc(a)}</h3><small>${esc(A.days || '')}</small></div><p>${n} 個地點${A.cap ? '・' + esc(A.cap) : ''}</p></a>`;
+  }).join('');
+  const inset = dayCfg(1).img ? {img: dayCfg(1).img, pos: dayCfg(1).pos} : null;
+  const hero = splitHero({
+    short: true, img: SITE.hero.img, pos: SITE.hero.pos, alt: trip.name, label: SITE.code,
+    kicker: esc(SITE.kicker || '') + (plan ? ' · 規劃中' : ' · 旅行回憶'),
+    title: `<span class="zh" style="font-size:1em;margin:0">${esc(trip.name)}</span>`,
+    lead: SITE.route ? esc(SITE.route) : '',
+    meta: [D.info.subtitle],
+    acts: plan
+      ? (D.days.length ? `<a class="btn" href="#${T()}" data-jump="meet">每天集合時間</a>${D.places.some(isVeg) ? `<a class="btn ghost" href="#${T()}" data-jump="veg">媽媽可以吃的店</a>` : `<a class="btn ghost" href="#${T()}-day-1">從第一天開始</a>`}` : '')
+      : (D.days.length ? `<a class="btn" href="#${T()}" data-jump="diary">翻照片日記</a>${D.places.length ? `<a class="btn ghost" href="#${T()}-places">我們去過的地方</a>` : ''}` : ''),
+    inset: inset && inset.img !== SITE.hero.img ? inset : null
+  });
+  const placesSec = areas ? `<section class="sec"${plan ? ' style="padding-top:0"' : ''}><div class="wrap">
+    <div class="sec-h"><div><p class="kicker">Destinations</p><h2>${plan ? '景點與店家' : '我們去過的地方'}</h2></div><p>${D.places.length} 個地點，依區域分類${SITE.placeNote ? '・' + clean(SITE.placeNote) : ''}</p></div>
+    <div class="areas">${areas}</div>
+    <p style="margin-top:36px"><a class="btn ghost" href="#${T()}-places">看全部地點</a></p>
+  </div></section>` : '';
+  const infoSec = info.length ? `<section class="sec" style="background:var(--paper)"><div class="wrap">
+    <div class="sec-h"><div><p class="kicker">Good to Know</p><h2>${plan ? '實用資訊' : '當時的行前準備'}</h2></div></div>
+    <div class="acc">${info.map((x, i) => `<details${plan && i === 0 ? ' open' : ''}><summary>${esc(x.k)}</summary><p>${clean(x.v)}</p></details>`).join('')}</div>
+  </div></section>` : '';
+  const memo = SITE.memo ? `<section class="sec memo-sec"><div class="wrap"><p class="kicker">${plan ? 'Note' : 'Memories'}</p><blockquote class="memo">${esc(SITE.memo)}</blockquote></div></section>` : '';
+  const empty = `<section class="sec"><div class="wrap"><p class="empty">行程還在規劃中，排好後會在這裡出現每天的集合時間和行程。</p></div></section>`;
+  quotes = [];
+
+  if (!plan){
+    // 已結束的旅程：照片日記為主，行程只留精簡清單
+    const {byDay, rest} = diaryPhotos();
+    const all = [];
+    const diary = D.days.map(d => {
+      const c = dayCfg(d.day), list = byDay[d.day], start = all.length;
+      all.push(...list);
+      return `<article class="diary">
+        <header>
+          <p class="num">${String(d.day).padStart(2, '0')}</p>
+          <div>
+            <small>DAY ${d.day}・${esc(d.date)}${c.area ? '・' + esc(c.area) : ''}</small>
+            <h3>${esc(d.title)}</h3>
+            ${c.memo ? `<p class="dmemo">${esc(c.memo)}</p>` : ''}
+            <a class="more" href="#${T()}-day-${d.day}">當天的行程</a>
+          </div>
+        </header>
+        ${list.length ? diaryGrid(list, start) : '<p class="dnone">這天還沒有照片</p>'}
+      </article>`;
+    }).join('');
+    const restStart = all.length; all.push(...rest);
+    app.innerHTML = hero + `
+    ${facts ? `<div class="facts">${facts}</div>` : ''}
+    ${memo}
+    ${D.days.length ? `<section class="sec" id="diary" style="scroll-margin-top:var(--navh)"><div class="wrap">
+      <div class="sec-h"><div><p class="kicker">Photo Diary</p><h2>每日照片日記</h2></div><p>${all.length} 張照片，依天數排好。點照片可以放大，左右滑看下一張。</p></div>
+      <div class="diaries">${diary}</div>
+      ${rest.length ? `<div class="diary rest"><header><p class="num">+</p><div><small>MORE</small><h3>其他照片</h3></div></header>${diaryGrid(rest, restStart)}</div>` : ''}
+    </div></section>` : empty}
+    ${placesSec}
+    ${D.days.length ? `<section class="sec" style="padding-top:0"><div class="wrap">
+      <div class="sec-h"><div><p class="kicker">Itinerary</p><h2>當時的行程</h2></div><p>${esc(SITE.route || D.info.subtitle)}</p></div>
+      <div class="dlist">${D.days.map(d => `<a href="#${T()}-day-${d.day}"><span class="n">${String(d.day).padStart(2, '0')}</span><span><small>${esc(d.date)}</small><b>${esc(d.title)}</b></span><span class="go">→</span></a>`).join('')}</div>
+    </div></section>` : ''}
+    ${infoSec}
+    ${footer()}`;
+    lbList = all;
+    paintMenu(trip.id);
+    return;
+  }
+
+  // 規劃中的旅程：給媽媽看的集合時間與素食店家放最前面
+  const meet = D.days.map(d => {
+    const rows = meetTimes(d);
+    return `<div class="meetday">
+      <div class="mh"><small>DAY ${d.day}</small><h3>${esc(d.date)}</h3><p>${esc(d.title)}</p></div>
+      <div class="ml">${rows.length ? rows.map(([t, x]) => `<div class="mr"><b>${esc(t)}</b><span>${esc(x)}</span></div>`).join('') : '<p class="mnone">這天沒有固定集合時間，跟著大家走就好。</p>'}</div>
+    </div>`;
+  }).join('');
+  const vegs = D.places.filter(isVeg);
+  const vegAreas = D.areaOrder.filter(a => vegs.some(p => p.area === a));
+  const veg = vegAreas.map(a => `<div class="vegarea"><h3>${esc(a)}<span>${vegs.filter(p => p.area === a).length} 家</span></h3>
+    <div class="vegs">${vegs.filter(p => p.area === a).map(p => `<div class="vegc">
+      <b>${esc(p.n)}</b>
+      <p>${clean(p.desc).replace(/<span class="okk">素食可<\/span>\s*/, '').replace(/^媽媽可吃。\s*/, '')}</p>
+      ${p.map ? `<a href="${esc(p.map)}" target="_blank" rel="noopener">在地圖開啟 ↗</a>` : ''}
+    </div>`).join('')}</div></div>`).join('');
   const days = D.days.map(d => {
     const c = dayCfg(d.day);
     return `<article class="dayrow">
@@ -611,48 +826,31 @@ function renderTrip(){
         <p class="num">${String(d.day).padStart(2, '0')}<small>DAY ${d.day}${c.area ? '・' + esc(c.area) : ''}</small></p>
         <h3>${esc(d.title)}</h3>
         <p class="date">${esc(d.date)}</p>
-        ${(c.must || []).length ? `<div class="must">${c.must.map(([t, x]) => `<span><b>${esc(t)}</b>${esc(x)}</span>`).join('')}</div>` : ''}
         ${(c.tips || []).length ? `<ul>${c.tips.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '<div style="height:24px"></div>'}
         <a class="more" href="#${T()}-day-${d.day}">看當天行程</a>
       </div>
     </article>`;
   }).join('');
-  const areas = D.areaOrder.map(a => {
-    const A = areaCfg(a), n = D.places.filter(p => p.area === a).length;
-    if (!n) return '';
-    return `<a class="areac" href="#${T()}-places-${A.id}"><div class="im">${pic('f', A.img, A.cap, '', a, true)}</div><div class="t"><h3>${esc(a)}</h3><small>${esc(A.days || '')}</small></div><p>${n} 個地點${A.cap ? '・' + esc(A.cap) : ''}</p></a>`;
-  }).join('');
-  const photos = tripPhotos(trip.id);
   quotes = D.days.flatMap(d => (dayCfg(d.day).tips || []).map(text => ({who: `DAY ${d.day}・${dayCfg(d.day).short || d.title}`, text})));
-  const inset = dayCfg(1).img ? {img: dayCfg(1).img, pos: dayCfg(1).pos} : null;
-  app.innerHTML = splitHero({
-    short: true, img: SITE.hero.img, pos: SITE.hero.pos, alt: trip.name, label: SITE.code,
-    kicker: esc(SITE.kicker || '') + (plan ? ' · 規劃中' : ''),
-    title: `<span class="zh" style="font-size:1em;margin:0">${esc(trip.name)}</span>`,
-    lead: SITE.route ? esc(SITE.route) : '',
-    meta: [D.info.subtitle],
-    acts: D.days.length ? `<a class="btn" href="#${T()}-day-1">從第一天開始</a>${D.places.length ? `<a class="btn ghost" href="#${T()}-places">景點與店家</a>` : ''}` : '',
-    inset: inset && inset.img !== SITE.hero.img ? inset : null
-  }) + `
+  const photos = tripPhotos(trip.id);
+  app.innerHTML = hero + `
   ${facts ? `<div class="facts">${facts}</div>` : ''}
+  ${memo}
+  ${D.days.length ? `<section class="sec mom" id="meet" style="scroll-margin-top:var(--navh)"><div class="wrap">
+    <div class="sec-h"><div><p class="kicker">For Mom · 給媽媽看</p><h2>每天集合時間</h2></div><p>只列要準時到的時間，其他時候跟著大家走就好。</p></div>
+    <div class="meet">${meet}</div>
+  </div></section>` : empty}
+  ${veg ? `<section class="sec mom veg" id="veg" style="scroll-margin-top:var(--navh)"><div class="wrap">
+    <div class="sec-h"><div><p class="kicker">Vegetarian · 素食</p><h2>媽媽可以吃的店</h2></div><p>${vegs.length} 家，依區域整理，點「在地圖開啟」就能導航。</p></div>
+    ${veg}
+  </div></section>` : ''}
   ${D.days.length ? `<section class="sec"><div class="wrap">
     <div class="sec-h"><div><p class="kicker">Itinerary</p><h2>${D.days.length} Days <i>Route</i></h2></div><p>${esc(SITE.route || D.info.subtitle)}</p></div>
     <div class="days">${days}</div>
-  </div></section>` : `<section class="sec"><div class="wrap"><p class="empty">行程還在規劃中，排好後會在這裡出現每日路線。</p></div></section>`}
+  </div></section>` : ''}
   ${quoteBlock('旅行小叮嚀')}
-  ${allKeys.length ? `<section class="sec"><div class="wrap">
-    <div class="sec-h"><div><p class="kicker">Key Times</p><h2>全程重要時間</h2></div><p>全員必須到場的集合、航班與船班。</p></div>
-    <div class="anchors">${allKeys.map(k => `<a class="anchor" href="#${T()}-day-${k.day}"><span class="t">${esc(k.time)}</span><span><small>DAY ${k.day}・${keyTag(k)}</small><p>${esc(plain(k.event).replace(/^集合：/, ''))}</p></span></a>`).join('')}</div>
-  </div></section>` : ''}
-  ${areas ? `<section class="sec" style="padding-top:0"><div class="wrap">
-    <div class="sec-h"><div><p class="kicker">Destinations</p><h2>景點與店家</h2></div><p>${D.places.length} 個地點，依區域分類${SITE.placeNote ? '・' + clean(SITE.placeNote) : ''}</p></div>
-    <div class="areas">${areas}</div>
-    <p style="margin-top:36px"><a class="btn ghost" href="#${T()}-places">看全部地點</a></p>
-  </div></section>` : ''}
-  ${info.length ? `<section class="sec" style="background:var(--paper)"><div class="wrap">
-    <div class="sec-h"><div><p class="kicker">Good to Know</p><h2>實用資訊</h2></div></div>
-    <div class="acc">${info.map((x, i) => `<details${i === 0 ? ' open' : ''}><summary>${esc(x.k)}</summary><p>${clean(x.v)}</p></details>`).join('')}</div>
-  </div></section>` : ''}
+  ${placesSec}
+  ${infoSec}
   ${photos.length ? `<section class="sec"><div class="wrap">
     <div class="sec-h"><div><p class="kicker">Gallery</p><h2>旅途剪影</h2></div><p>${photos.length} 張照片</p></div>
     ${wall(photos)}
@@ -665,6 +863,7 @@ function renderTrip(){
 function renderDay(n){
   const d = D.days.find(x => x.day === n) || D.days[0];
   if (!d) return renderTrip();
+  const plan = trip.status === 'planning';
   const c = dayCfg(d.day), area = c.area;
   const prev = D.days.find(x => x.day === d.day - 1), next = D.days.find(x => x.day === d.day + 1);
   const cur = SITE.cur || '¥';
@@ -679,22 +878,31 @@ function renderDay(n){
   }).join('');
   const legs = d.transfers.map(t => `<div><b>${esc(t.leg)}</b>${t.time || t.cost ? `<span>${esc(t.time || '')}${t.cost ? '　' + cur + Number(t.cost).toLocaleString() : ''}</span>` : ''}<p>${clean(t.way)}</p></div>`).join('');
   const nPlaces = D.places.filter(p => p.area === area).length;
+  // 已結束的旅程：這天的照片
+  const shots = plan ? [] : diaryPhotos().byDay[d.day];
+  const vegHere = plan ? D.places.filter(p => isVeg(p) && p.area === area) : [];
   quotes = [];
   app.innerHTML = splitHero({
     short: true, img: c.img, pos: c.pos, cap: c.cap, alt: c.cap, label: 'Day ' + d.day,
     kicker: `<a href="#${T()}" style="text-decoration:none">${esc(trip.name)}</a>　·　Day ${d.day}`,
     title: `<span class="en" style="font-style:italic">Day ${String(d.day).padStart(2, '0')}</span><span class="zh">${esc(d.title)}</span>`,
+    lead: !plan && c.memo ? esc(c.memo) : '',
     meta: [d.date, area].filter(Boolean)
   }) + `
   <div class="daytabs"><nav class="wrap" aria-label="切換日期">${tabs}</nav></div>
   <main class="wrap" style="padding-block:clamp(40px,6vw,72px) clamp(56px,8vw,96px)">
+    ${shots.length ? `<section aria-label="這天的照片" style="margin-bottom:clamp(48px,7vw,80px)">
+      <div class="sec-h" style="margin-bottom:24px"><div><p class="kicker">Photo Diary</p><h2 style="font-size:clamp(28px,4vw,48px)">這天的照片</h2></div><p>${shots.length} 張</p></div>
+      <div class="pphotos" style="margin-top:0">${shots.map((ph, k) => `<button type="button" data-ph="${k}" aria-label="放大照片：${esc(ph.c)}"><img src="${imgSrc('t', ph.n)}" alt="${esc(ph.c)}" loading="lazy"></button>`).join('')}</div>
+    </section>` : ''}
     <div class="dlayout">
-      <section aria-label="當日行程"><ol class="tl">${items}</ol></section>
+      <section aria-label="當日行程">${shots.length ? '<h2 class="tlh">當天的行程</h2>' : ''}<ol class="tl">${items}</ol></section>
       <aside class="side">
         ${(c.must || []).length || (c.tips || []).length || c.foot ? `<div class="box"><h3>今天的重點</h3>
           ${(c.must || []).length ? `<div class="mustl">${c.must.map(([t, x]) => `<div><b>${esc(t)}</b><span>${esc(x)}</span></div>`).join('')}</div>` : ''}
           ${(c.tips || []).length ? `<ul>${c.tips.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
           ${c.foot ? `<p class="foot">${esc(c.foot)}</p>` : ''}</div>` : ''}
+        ${vegHere.length ? `<div class="box"><h3>媽媽可以吃</h3><div class="legs">${vegHere.map(p => `<div><b>${esc(p.n)}</b>${p.map ? `<span><a href="${esc(p.map)}" target="_blank" rel="noopener">地圖 ↗</a></span>` : ''}</div>`).join('')}</div></div>` : ''}
         ${legs ? `<div class="box"><h3>怎麼移動</h3><div class="legs">${legs}</div></div>` : ''}
         ${area && nPlaces ? `<a class="areac" href="#${T()}-places-${areaCfg(area).id}"><div class="im" style="aspect-ratio:16/10">${pic('f', areaCfg(area).img, area, '', area, true)}</div><div class="t"><h3>${esc(area)}的景點與店家</h3><small>${nPlaces} 個</small></div>${c.hint ? `<p>${esc(c.hint)}</p>` : ''}</a>` : ''}
       </aside>
@@ -705,6 +913,7 @@ function renderDay(n){
     </div>
   </main>
   ${footer()}`;
+  lbList = shots;
   paintMenu(trip.id);
 }
 
@@ -799,6 +1008,8 @@ lb.addEventListener('touchend', e => { if (touchX == null) return; const dx = e.
 app.addEventListener('click', e => {
   const b = e.target.closest('[data-ph]');
   if (b) return openLb(+b.dataset.ph);
+  const j = e.target.closest('[data-jump]');
+  if (j){ e.preventDefault(); const el = document.getElementById(j.dataset.jump); if (el) el.scrollIntoView({behavior:'smooth'}); return; }
   const q = e.target.closest('[data-q]');
   if (q && quotes.length){ qAt = (qAt + +q.dataset.q + quotes.length) % quotes.length; paintQuote(); }
 });
