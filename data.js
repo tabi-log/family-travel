@@ -1489,8 +1489,8 @@ window.TRIP_DATA = {
      "pos": 60
     },
     "hero": {
-     "img": "09",
-     "pos": 40
+     "img": "20",
+     "pos": 68
     },
     "placeNote": "「素食可」＝媽媽可以吃（蛋奶素）",
     "days": {
