@@ -467,6 +467,8 @@ footer .copy{border-top:1px solid color-mix(in srgb,var(--butter) 30%,transparen
 .chapter .feat.print,.chapter .feat.filmb{background:#FFFDF9;box-shadow:0 2px 3px rgba(80,55,30,.06),0 30px 60px -30px rgba(80,55,30,.45)}
 .chapter .feat.cap,.chapter .feat.blur{box-shadow:0 30px 60px -32px rgba(80,55,30,.5)}
 .chapter .film,.scraps .film,.epilogue .film{filter:saturate(.82) contrast(.95) brightness(1.04) sepia(.12)}
+/* 食物要亮、要暖才好吃：不套灰調，改成提亮＋暖色 */
+.film.food,.chapter .film.food,.scraps .film.food,.epilogue .film.food,.lb img.food{filter:brightness(1.1) saturate(1.18) contrast(1.04) sepia(.08) hue-rotate(-4deg)}
 .chapter .feat.bleed{box-shadow:none}
 
 /* 手機底部分頁列 */
@@ -770,17 +772,22 @@ function loadDims(ns){
 }
 
 // 一天的照片日記：橫向主照片滿版（不加框），直向主照片留白並輪流用相片處理；小照片混搭無框、白邊、黑框
+// 食物照片：看照片說明有沒有吃的喝的；店面、樓梯、牆面、街景這類不算
+const FOOD = /粥|麵|豆腐|咖啡|茶|飲|麵包|甜|餅|糕|飯|餐|食|奶|冰|拿鐵|小吃|燒|丼|壽司|一蘭|瑞幸|一樹一葉/;
+const NOT_FOOD = /樓梯|插畫牆|照片牆|門市|店門口|招牌|門口|燈塔|廣場|商店街/;
+const isFoodPhoto = ph => !!ph && FOOD.test(ph.c || '') && !NOT_FOOD.test(ph.c || '');
+const tone = ph => isFoodPhoto(ph) ? 'film food' : 'film';
 const FRAMES = ['print', 'filmb', 'blur', 'cap'];
 const PRINTS = ['plain', 'mat', 'mat fb'];
 const TILTS = [-1.6, 1.2, -0.7, 1.8, -1.1, 0.8];
-const printCard = (ph, i, k) => `<button type="button" class="pr ${PRINTS[k % 3]}" style="--rot:${TILTS[(i + k) % TILTS.length]}deg" data-ph="${i}" aria-label="放大照片：${esc(ph.c)}"><img class="film" src="${imgSrc('t', ph.n)}" alt="${esc(ph.c)}" loading="lazy"><span>${esc(ph.c || ' ')}</span></button>`;
+const printCard = (ph, i, k) => `<button type="button" class="pr ${PRINTS[k % 3]}" style="--rot:${TILTS[(i + k) % TILTS.length]}deg" data-ph="${i}" aria-label="放大照片：${esc(ph.c)}"><img class="${tone(ph)}" src="${imgSrc('t', ph.n)}" alt="${esc(ph.c)}" loading="lazy"><span>${esc(ph.c || ' ')}</span></button>`;
 function diarySpread(list, start, kind, stamp){
   const [f, ...others] = list, bleed = kind === 'bleed';
   const src = imgSrc('f', f.n), small = others.slice(0, 4), more = others.length - small.length;
   const pos = f.pos == null ? '' : ` style="object-position:center ${f.pos}%"`;
   const feat = `<button type="button" class="feat ${kind}" data-ph="${start}" aria-label="放大照片：${esc(f.c)}">
     ${kind === 'blur' ? `<span class="bgimg" style="background-image:url('${src}')"></span><span class="veil"></span>` : ''}
-    <img class="film" src="${src}" alt="${esc(f.c)}" loading="lazy"${bleed ? pos : ''}>
+    <img class="${tone(f)}" src="${src}" alt="${esc(f.c)}" loading="lazy"${bleed ? pos : ''}>
     ${kind === 'cap' && f.c ? `<span class="script">${esc(f.c)}</span>` : ''}
     ${(kind === 'cap' || bleed) && stamp ? `<span class="stamp">${esc(stamp)}</span>` : ''}
     ${kind !== 'cap' && f.c ? `<span class="note">${esc(f.c)}</span>` : ''}
@@ -968,7 +975,7 @@ function renderTrip(){
     </div></section>` : ''}
     <section class="epilogue" style="background:${tone(n - 1)}">
       <div class="wrap">
-        ${ending.length ? `<div class="stack">${ending.map((ph, k) => `<span class="pr mat" style="--rot:${[-5, 3, -1][k]}deg"><img class="film" src="${imgSrc('t', ph.n)}" alt="" loading="lazy"></span>`).join('')}</div>` : ''}
+        ${ending.length ? `<div class="stack">${ending.map((ph, k) => `<span class="pr mat" style="--rot:${[-5, 3, -1][k]}deg"><img class="${tone(ph)}" src="${imgSrc('t', ph.n)}" alt="" loading="lazy"></span>`).join('')}</div>` : ''}
         <div class="tx">
           <p class="kicker">Epilogue · 尾聲</p>
           <h2>${esc(trip.name)}，就收在這裡。</h2>
@@ -1184,7 +1191,7 @@ function renderPlace(i){
 
 // 燈箱
 const lb = document.getElementById('lb');
-function paintLb(){ const ph = lbList[lbAt]; if (!ph) return; lb.querySelector('img').src = imgSrc('f', ph.n); lb.querySelector('img').alt = ph.c; lb.querySelector('.cap span').textContent = `${ph.c}　${lbAt + 1} / ${lbList.length}`; }
+function paintLb(){ const ph = lbList[lbAt]; if (!ph) return; lb.querySelector('img').src = imgSrc('f', ph.n); lb.querySelector('img').className = isFoodPhoto(ph) ? 'food' : ''; lb.querySelector('img').alt = ph.c; lb.querySelector('.cap span').textContent = `${ph.c}　${lbAt + 1} / ${lbList.length}`; }
 function openLb(k){ lbAt = k; lb.hidden = false; paintLb(); document.addEventListener('keydown', lbKeys); lb.querySelector('[data-lb="x"]').focus(); }
 function closeLb(){ lb.hidden = true; document.removeEventListener('keydown', lbKeys); }
 function stepLb(n){ if (!lbList.length) return; lbAt = (lbAt + n + lbList.length) % lbList.length; paintLb(); }
