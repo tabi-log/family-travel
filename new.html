@@ -6,21 +6,32 @@
 <title>家族旅行</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&family=Source+Code+Pro:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700;900&display=swap">
 <style>
-/* 新版外觀：左右分割大圖＋奶油黃色塊、高對比襯線大標、打字機感等寬內文、膠囊按鈕
-   中文標題用思源宋體、中文內文用思源黑體；英數字用 Bodoni Moda／IBM Plex Mono */
+/* 新版外觀：左右分割大圖＋主色色塊、襯線大標、打字機感等寬內文、膠囊按鈕
+   字體全部用 Adobe「思源」同一家族：中文標題思源宋體、中文內文思源黑體，
+   英文標題 Source Serif 4（思源宋體的英文本家）、英數字標籤 Source Code Pro（思源黑體的等寬版） */
 :root{
   color-scheme:light;
   --bg:#FBF5EA; --paper:#FFFDF8; --butter:#FCDA93; --butter-2:#F8E7BF; --line:#E3D6BE;
   --ink:#3A2A25; --mute:#7A6A60; --soft:#A39588;
   --sage:#7E8C6A; --sage-soft:#E6EADB; --rust:#B4583A; --rust-soft:#F7E1D5;
-  --f-display:"Bodoni Moda","Noto Serif TC","Source Han Serif TC","思源宋體",serif;
+  --f-display:"Source Serif 4","Noto Serif TC","Source Han Serif TC","思源宋體",serif;
   --f-serif:"Noto Serif TC","Source Han Serif TC","思源宋體",serif;
-  --f-mono:"IBM Plex Mono","Noto Sans TC","Source Han Sans TC","思源黑體",monospace;
+  --f-mono:"Source Code Pro","Noto Sans TC","Source Han Sans TC","思源黑體",monospace;
   --f-sans:"Noto Sans TC","Source Han Sans TC","思源黑體","PingFang TC","Microsoft JhengHei",sans-serif;
   --gut:max(16px,env(safe-area-inset-left,0px));
   --navh:76px;
+}
+/* 紅磚陶土：取自閩南紅磚、鳥居朱紅、燈籠的暖色 */
+:root[data-palette="clay"]{
+  --bg:#FAF4EF; --paper:#FFFCF9; --butter:#E8B79E; --butter-2:#F5DDD0; --line:#E6D3C6;
+  --ink:#3B2622; --mute:#7E6560; --soft:#A89089; --sage:#9A6B57; --rust:#A8432C; --rust-soft:#F6DED3;
+}
+/* 海霧藍：取自港口、海面與傍晚天空的藍灰 */
+:root[data-palette="sea"]{
+  --bg:#F5F5F1; --paper:#FFFFFF; --butter:#C6D6DC; --butter-2:#E1EAEC; --line:#D5DCDC;
+  --ink:#1F2E3A; --mute:#5E6B74; --soft:#8E9AA2; --sage:#5F7C8A; --rust:#B9603F; --rust-soft:#F4E2D9; --sage-soft:#E1EAEC;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -52,7 +63,7 @@ a:hover .more::after,.more:hover::after{transform:translateX(4px)}
 
 /* 頁首：襯線 logo＋外框膠囊選單 */
 .nav{position:fixed;inset:0 0 auto;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:background .3s,box-shadow .3s}
-.nav.solid{background:rgba(251,245,234,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 1px 0 var(--line)}
+.nav.solid{background:color-mix(in srgb,var(--bg) 94%,transparent);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 1px 0 var(--line)}
 .page{padding-top:calc(var(--navh) + env(safe-area-inset-top,0px))}
 .nav .wrap{height:var(--navh);display:flex;align-items:center;gap:16px;max-width:none;padding-left:max(24px,var(--gut));padding-right:max(24px,env(safe-area-inset-right,0px))}
 .logo{display:flex;align-items:baseline;gap:12px;text-decoration:none;font-family:var(--f-serif);font-weight:900;font-size:26px;letter-spacing:.06em;white-space:nowrap;background:var(--bg);padding:2px 18px 4px;border-radius:999px;transition:background .3s}
@@ -67,7 +78,7 @@ a:hover .more::after,.more:hover::after{transform:translateX(4px)}
 .drawer{position:fixed;inset:0;z-index:60;background:var(--butter);color:var(--ink);padding:calc(env(safe-area-inset-top,0px) + 18px) 24px 40px;display:flex;flex-direction:column;overflow-y:auto}
 .drawer .x{align-self:flex-end;background:none;border:1.2px solid var(--ink);border-radius:999px;padding:6px 16px;font-family:var(--f-mono);font-size:14px}
 .drawer nav{margin-top:32px;display:flex;flex-direction:column}
-.drawer nav a{padding:18px 0;border-bottom:1px solid rgba(58,42,37,.25);text-decoration:none;font-family:var(--f-display);font-size:34px;line-height:1.2;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.drawer nav a{padding:18px 0;border-bottom:1px solid color-mix(in srgb,var(--ink) 25%,transparent);text-decoration:none;font-family:var(--f-display);font-size:34px;line-height:1.2;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .drawer nav a small{font-family:var(--f-mono);font-size:13px;color:var(--mute)}
 
 /* 分割大圖：左照片、右奶油黃色塊 */
@@ -77,9 +88,9 @@ a:hover .more::after,.more:hover::after{transform:translateX(4px)}
 .split .ph img,.split .ph .noimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .split .ph img{animation:zoom 14s ease-out both}
 @keyframes zoom{from{transform:scale(1.06)}to{transform:scale(1)}}
-.split .ph figcaption{position:absolute;left:20px;bottom:16px;font-family:var(--f-mono);font-size:12px;color:#fff;background:rgba(58,42,37,.55);padding:3px 12px;border-radius:999px}
+.split .ph figcaption{position:absolute;left:20px;bottom:16px;font-family:var(--f-mono);font-size:12px;color:#fff;background:color-mix(in srgb,var(--ink) 55%,transparent);padding:3px 12px;border-radius:999px}
 .split .panel{position:relative;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--navh) + clamp(32px,5vw,72px)) clamp(24px,4vw,64px) clamp(40px,5vw,72px)}
-.split h1{font-size:clamp(48px,7.2vw,112px);line-height:1.02;letter-spacing:-.01em}
+.split h1{font-size:clamp(44px,6.4vw,100px);line-height:1.05;letter-spacing:-.015em;font-weight:400}
 .split h1 .zh{display:block;font-family:var(--f-serif);font-weight:900;letter-spacing:.04em;font-size:.82em;margin-top:.12em}
 .split h1 .en{display:block}
 .split .lead{font-family:var(--f-mono);font-size:clamp(15px,1.4vw,18px);line-height:1.75;margin-top:clamp(24px,3vw,40px);max-width:30em}
@@ -152,7 +163,7 @@ a:hover .more::after,.more:hover::after{transform:translateX(4px)}
 
 /* 頁尾 */
 footer{background:var(--ink);color:var(--butter-2);padding:clamp(56px,8vw,96px) 0 calc(28px + env(safe-area-inset-bottom,0px))}
-footer .big{font-family:var(--f-display);font-size:clamp(48px,9vw,128px);line-height:1;color:var(--butter);border-bottom:1px solid rgba(252,218,147,.3);padding-bottom:28px;margin-bottom:36px}
+footer .big{font-family:var(--f-display);font-size:clamp(48px,9vw,128px);line-height:1;color:var(--butter);border-bottom:1px solid color-mix(in srgb,var(--butter) 30%,transparent);padding-bottom:28px;margin-bottom:36px}
 footer .big i{font-weight:400}
 footer .grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px}
 footer p{font-family:var(--f-mono);font-size:14px;line-height:1.9}
@@ -160,12 +171,12 @@ footer h4{margin:0 0 12px;font-family:var(--f-mono);font-size:13px;letter-spacin
 footer nav{display:flex;flex-direction:column;gap:6px;font-size:15px}
 footer nav a{text-decoration:none}
 footer nav a:hover{text-decoration:underline}
-footer .copy{border-top:1px solid rgba(252,218,147,.3);margin-top:40px;padding-top:20px;font-family:var(--f-mono);font-size:13px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;opacity:.7}
+footer .copy{border-top:1px solid color-mix(in srgb,var(--butter) 30%,transparent);margin-top:40px;padding-top:20px;font-family:var(--f-mono);font-size:13px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;opacity:.7}
 
 /* 旅程頁：資訊條 */
 .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));background:var(--ink);color:var(--butter-2)}
 .facts div{padding:24px clamp(20px,3vw,40px)}
-.facts div+div{border-left:1px solid rgba(252,218,147,.25)}
+.facts div+div{border-left:1px solid color-mix(in srgb,var(--butter) 25%,transparent)}
 .facts small{display:block;font-family:var(--f-mono);font-size:13px;letter-spacing:.12em;opacity:.7}
 .facts b{display:block;font-family:var(--f-serif);font-weight:700;font-size:18px;margin-top:4px;line-height:1.5;color:var(--butter)}
 
@@ -353,8 +364,8 @@ footer .copy{border-top:1px solid rgba(252,218,147,.3);margin-top:40px;padding-t
   .stats div:nth-child(n+3){border-top:1px solid var(--ink)}
   .facts{grid-template-columns:1fr 1fr}
   .facts div+div{border-left:0}
-  .facts div:nth-child(even){border-left:1px solid rgba(252,218,147,.25)}
-  .facts div:nth-child(n+3){border-top:1px solid rgba(252,218,147,.25)}
+  .facts div:nth-child(even){border-left:1px solid color-mix(in srgb,var(--butter) 25%,transparent)}
+  .facts div:nth-child(n+3){border-top:1px solid color-mix(in srgb,var(--butter) 25%,transparent)}
   .facts div{padding:16px}
   .facts b{font-size:16px}
   .tl li{grid-template-columns:72px 1fr;gap:14px}
@@ -414,6 +425,10 @@ footer .copy{border-top:1px solid rgba(252,218,147,.3);margin-top:40px;padding-t
   <p class="cap"><span></span></p>
 </div>
 
+<script>
+// 試看色票：網址加 ?c=clay 或 ?c=sea
+try { const c = new URLSearchParams(location.search).get('c'); if (/^(clay|sea)$/.test(c)) document.documentElement.dataset.palette = c; } catch (e) {}
+</script>
 <script src="data.js"></script>
 <script>
 // 新版前台：讀同一份 data.js（SITE 首頁設定、TRIPS 各趟旅程、PHOTOS 照片庫），網址格式與 index.html 相同
