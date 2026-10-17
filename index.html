@@ -467,8 +467,6 @@ footer .copy{border-top:1px solid color-mix(in srgb,var(--butter) 30%,transparen
 .film.food,.chapter .film.food,.scraps .film.food,.epilogue .film.food,.lb img.food{filter:brightness(1.1) saturate(1.18) contrast(1.04) sepia(.08) hue-rotate(-4deg)}
 .chapter .feat.bleed{box-shadow:none}
 
-/* 手機底部分頁列 */
-.tabbar{display:none}
 
 @media (max-width:1080px){
   .menu a:not(.cta):not([aria-current]){display:none}
@@ -503,7 +501,7 @@ footer .copy{border-top:1px solid color-mix(in srgb,var(--butter) 30%,transparen
   footer .grid>div:first-child{grid-column:1/-1}
 }
 @media (max-width:640px){
-  body{font-size:15px;padding-bottom:calc(62px + env(safe-area-inset-bottom,0px))}
+  body{font-size:15px}
   .split h1{font-size:clamp(44px,13vw,64px)}
   .split .acts .btn{flex:1}
   .logo{padding:2px 14px 4px}
@@ -538,11 +536,6 @@ footer .copy{border-top:1px solid color-mix(in srgb,var(--butter) 30%,transparen
   .area-h{grid-template-columns:1fr}
   .area-h .im{aspect-ratio:16/9}
   .anchor .t{font-size:32px}
-  .tabbar{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;inset:auto 0 0;z-index:45;background:var(--bg);border-top:1px solid var(--ink);padding-bottom:env(safe-area-inset-bottom,0px)}
-  .tabbar a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 0 7px;text-decoration:none;font-family:var(--f-mono);font-size:11px;color:var(--mute)}
-  .tabbar svg{width:22px;height:22px}
-  .tabbar a[aria-current]{color:var(--ink);font-weight:500}
-  .tabbar a[aria-current] svg{background:var(--butter);border-radius:999px;padding:1px;box-sizing:content-box;width:30px}
   footer .grid{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){
@@ -566,13 +559,6 @@ footer .copy{border-top:1px solid color-mix(in srgb,var(--butter) 30%,transparen
 </div>
 
 <div id="app"></div>
-
-<nav class="tabbar" id="tabbar" aria-label="快速切換">
-  <a href="#home" data-tab="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg>首頁</a>
-  <a href="#home" data-tab="trip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h6a4 4 0 0 0 0-8h-4a4 4 0 0 1 0-8h6"/></svg>旅程</a>
-  <a href="#home" data-tab="day"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg><span id="tab-day">每日</span></a>
-  <a href="#home" data-tab="places"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>地點</a>
-</nav>
 
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="照片">
   <img alt="">
@@ -1203,30 +1189,11 @@ app.addEventListener('click', e => {
   if (q && quotes.length){ qAt = (qAt + +q.dataset.q + quotes.length) % quotes.length; paintQuote(); }
 });
 
-// 底部分頁列：記住目前看的旅程與天數
-let lastTrip = null, lastDay = 1;
-function syncTabs(h){
-  const m = h.match(/^t-([a-z0-9]+)(?:-(day|places?)-?(\w*))?$/);
-  if (m && m[1] !== lastTrip){ lastTrip = m[1]; lastDay = 1; }
-  if (m && m[2] === 'day') lastDay = +m[3] || 1;
-  if (!lastTrip){ const first = sortedTrips().find(t => t.status !== 'planning') || TRIPS[0]; lastTrip = first && first.id; }
-  const tab = !m ? 'home' : m[2] === 'day' ? 'day' : m[2] ? 'places' : 'trip';
-  document.querySelectorAll('#tabbar a').forEach(a => {
-    if (a.dataset.tab === tab) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
-  });
-  const q = s => document.querySelector(`#tabbar [data-tab="${s}"]`);
-  q('trip').href = `#t-${lastTrip}`;
-  q('day').href = `#t-${lastTrip}-day-${lastDay}`;
-  q('places').href = `#t-${lastTrip}-places`;
-  document.getElementById('tab-day').textContent = tab === 'day' ? 'DAY ' + lastDay : '每日';
-}
-
 function route(){
   closeLb();
   const h = location.hash.replace('#', '');
   // 首頁內的錨點（#trips）只捲動，不重畫
   if (h === 'trips' && trip === null && app.querySelector('#trips')) return;
-  syncTabs(h);
   let m, focused = false;
   if ((m = h.match(/^t-([a-z0-9]+)(.*)$/)) && useTrip(m[1])){
     const rest = m[2]; let r;
