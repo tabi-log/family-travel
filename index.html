@@ -116,11 +116,9 @@ a:hover .more::after,.more:hover::after{transform:translateX(4px)}
 /* 旅程卡片：三聯拼貼封面、宋體粗標題、字距拉開的灰色資訊、Read more 連結 */
 .trips{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(36px,4vw,56px) clamp(20px,3vw,36px)}
 .trip{display:flex;flex-direction:column;text-decoration:none}
-.trip .ph{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:10px;background:var(--sage)}
-.trip .ph>img,.trip .ph>.noimg{width:100%;height:100%;object-fit:cover}
-.trip .tri{display:grid;grid-template-columns:repeat(3,1fr);height:100%}
-.trip .tri img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
-.trip:hover .tri img{transform:scale(1.06)}
+.trip .ph{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:10px;background:var(--sage)}
+.trip .ph>img,.trip .ph>.noimg{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+.trip:hover .ph img{transform:scale(1.04)}
 .trip .code{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-family:var(--f-display);font-style:italic;font-size:clamp(18px,1.8vw,24px);color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.45);pointer-events:none}
 .trip .badge{position:absolute;right:12px;top:12px;background:var(--ink);color:var(--butter);font-family:var(--f-mono);font-size:13px;padding:2px 14px;border-radius:999px}
 .trip .cap{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:22px 4px 0}
@@ -319,8 +317,6 @@ footer .copy{border-top:1px solid color-mix(in srgb,var(--butter) 30%,transparen
 .nextc{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);background:var(--butter);text-decoration:none;border-radius:10px;overflow:hidden}
 .nextc .im{position:relative;min-height:clamp(260px,30vw,420px);background:var(--sage)}
 .nextc .im>*{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.nextc .tri{display:grid;grid-template-columns:repeat(3,1fr)}
-.nextc .tri img{width:100%;height:100%;object-fit:cover}
 .nextc .tx{padding:clamp(28px,4vw,56px);display:flex;flex-direction:column;justify-content:center;gap:10px}
 .nextc h3{font-family:var(--f-serif);font-weight:900;font-size:clamp(34px,4.6vw,60px)}
 .nextc .sub{font-family:var(--f-mono);font-size:14px;color:var(--mute)}
@@ -673,20 +669,14 @@ function footer(){
   </div></footer>`;
 }
 
-// 旅程封面：封面照＋該趟另外兩張照片，拼成三聯直幅
-function triptych(t){
-  const first = t.S.card && t.S.card.img;
-  const more = PHOTOS.filter(p => p.trip === t.id && p.n !== first).map(p => p.n);
-  const pick = [first, more[Math.floor(more.length / 3)], more[Math.floor(more.length * 2 / 3)]].filter(Boolean);
-  if (pick.length < 3) return pic('f', first, t.name, fit(t.S.card && t.S.card.pos), t.S.code, true);
-  return `<div class="tri">${pick.map((n, i) => `<img src="${imgSrc('t', n)}" alt="" loading="lazy"${i === 0 ? ` style="${fit(t.S.card.pos)}"` : ''}>`).join('')}</div>`;
-}
+// 旅程封面：用後台「首頁卡片」設定的那一張
+const cover = t => pic('f', t.S.card && t.S.card.img, t.name, fit(t.S.card && t.S.card.pos), t.S.code, true);
 
 function tripCard(t, k){
   useTrip(t.id);
   const plan = t.status === 'planning';
   return `<a class="trip" href="#${T()}">
-    <div class="ph">${triptych(t)}${plan ? '<span class="badge">規劃中</span>' : ''}${SITE.card.img && SITE.code ? `<span class="code">${esc(SITE.code)}</span>` : ''}</div>
+    <div class="ph">${cover(t)}${plan ? '<span class="badge">規劃中</span>' : ''}${SITE.card.img && SITE.code ? `<span class="code">${esc(SITE.code)}</span>` : ''}</div>
     <div class="cap"><h3>${esc(t.name)}${SITE.route ? `<small>${esc(SITE.route)}</small>` : ''}</h3><span class="no">${String(k + 1).padStart(2, '0')}</span></div>
     <p class="tmeta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>${esc(D.info.subtitle)}</span><span>/</span><span>${D.days.length || '—'} DAYS・${D.places.length} PLACES</span></p>
     <span class="read">${plan ? '看行前資訊' : '翻照片日記'} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M14 7l5 5-5 5"/></svg></span>
@@ -832,7 +822,7 @@ function renderHome(){
   const covers = done.map(t => t.S.card).filter(c => c && c.img && c.img !== h.img);
   const next = plans[0];
   const nextCard = next ? (useTrip(next.id), `<a class="nextc" href="#${T()}">
-      <div class="im">${triptych(next)}</div>
+      <div class="im">${cover(next)}</div>
       <div class="tx">
         <p class="kicker">Next Trip · 下一趟旅程</p>
         <h3>${esc(next.name)}</h3>
