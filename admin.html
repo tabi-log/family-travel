@@ -734,9 +734,10 @@ async function addFiles(files){
       const n = nextNum();
       const fBlob = await resize(file, 1600, 1600, false), tBlob = await resize(file, 520, 390, true);
       const c = file.name.replace(/\.[^.]+$/, '');
+      const bmp = await createImageBitmap(file), r = +(bmp.width / bmp.height).toFixed(2);
       pending.push({n, c, fBlob, tBlob, fUrl: URL.createObjectURL(fBlob), tUrl: URL.createObjectURL(tBlob)});
       data.PHOTOS = data.PHOTOS || [];
-      data.PHOTOS.push({n, c, p: null});
+      data.PHOTOS.push({n, c, p: null, r});
     } catch(e){ toast(`「${file.name}」無法讀取，請換成 JPG 或 PNG`); }
   }
   render(); changed();
