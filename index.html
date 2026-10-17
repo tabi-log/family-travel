@@ -728,14 +728,16 @@ const isVeg = p => /🌱|媽媽可吃|素食可/.test(`${p.desc || ''} ${p.tag |
 function diaryPhotos(){
   const norm = s => String(s || '').replace(/[\s・·／/（）()]/g, '');
   const dayText = d => { const c = dayCfg(d.day); return norm([d.title, ...d.items.map(i => i.event), ...(c.tips || []), c.hint, c.cap, ...(c.must || []).map(m => m[1])].join(' ')); };
-  const texts = D.days.map(d => ({d, t: dayText(d)}));
-  const byDay = {}, rest = [];
+  const texts = D.days.map(d => ({d, t: dayText(d), seq: norm(d.items.map(i => i.event).join(' '))}));
+  const byDay = {}, rest = [], at = new Map();
   D.days.forEach(d => { byDay[d.day] = []; });
   tripPhotos(trip.id).forEach(ph => {
     let day = ph.day && byDay[ph.day] ? ph.day : null;
     if (!day && ph.p){
       const keys = [ph.p, ...ph.p.split(/[\s／/・]/)].filter(k => k && k.length >= 2).map(norm);
       const hit = texts.find(x => keys.some(k => x.t.includes(k)));
+      // 記下照片地點在當天行程裡的順序，照片照行程先後排
+      if (hit){ const i = Math.min(...keys.map(k => hit.seq.indexOf(k)).filter(i => i >= 0)); if (isFinite(i)) at.set(ph, i); }
       const place = D.places.find(p => p.n === ph.p);
       day = hit ? hit.d.day : place ? (D.days.find(d => dayCfg(d.day).area === place.area) || {}).day : null;
     }
@@ -745,6 +747,7 @@ function diaryPhotos(){
     }
     (day ? byDay[day] : rest).push(ph);
   });
+  D.days.forEach(d => { byDay[d.day] = byDay[d.day].map((ph, i) => ({ph, i})).sort((a, b) => (at.has(a.ph) ? at.get(a.ph) : 1e4) - (at.has(b.ph) ? at.get(b.ph) : 1e4) || a.i - b.i).map(x => x.ph); });
   // 每天的橫幅照片也放進當天（沒放過的話）
   D.days.forEach(d => { const c = dayCfg(d.day); if (c.img){ const own = byDay[d.day].find(p => p.n === c.img); byDay[d.day] = [{...(own || {}), n:c.img, c:c.cap || (own || {}).c || '', pos:c.pos}, ...byDay[d.day].filter(p => p.n !== c.img)]; } });
   // 橫幅照片只留在自己那天，不在別天重複出現
