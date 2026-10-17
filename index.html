@@ -333,7 +333,6 @@ footer .copy{border-top:1px solid color-mix(in srgb,var(--butter) 30%,transparen
 .memo{margin:16px 0 0;font-family:var(--f-serif);font-weight:500;font-size:clamp(20px,2.4vw,28px);line-height:1.8;max-width:34em;white-space:pre-line}
 
 /* 每日照片日記 */
-.diaries{display:grid;gap:clamp(56px,8vw,104px)}
 .diary{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.4fr);gap:clamp(24px,4vw,56px);align-items:start}
 .diary.rest{margin-top:clamp(56px,8vw,104px)}
 .diary header{position:sticky;top:calc(var(--navh) + 24px);display:flex;flex-direction:column;gap:6px}
@@ -345,12 +344,12 @@ footer .copy{border-top:1px solid color-mix(in srgb,var(--butter) 30%,transparen
 /* 相片處理：底片色調、手寫字、霧化背景框、相紙、底片黑框 */
 .film{filter:saturate(.85) contrast(.95) brightness(1.04) sepia(.06)}
 .spread{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(18px,2.6vw,32px);align-items:start}
-.diaries .diary:nth-child(even) .spread{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)}
-.diaries .diary:nth-child(even) .feat{order:2}
+.chapter:nth-child(even) .diary .spread{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)}
+.chapter:nth-child(even) .diary .feat{order:2}
 .feat{position:relative;display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;overflow:hidden;text-align:left}
 .feat img{display:block;width:100%}
 .feat.bleed{width:100vw;margin-left:calc(50% - 50vw);overflow:hidden}
-.diaries .diary .feat.bleed{order:0}
+.chapter .diary .feat.bleed{order:0}
 .feat.bleed img{max-height:84vh;object-fit:cover}
 .feat.bleed .stamp{left:max(24px,calc(50vw - 590px));bottom:56px}
 .feat.bleed .note{position:static;display:block;max-width:1240px;margin:0 auto;padding:12px max(16px,var(--gut)) 0;text-align:right;color:var(--mute)}
@@ -358,10 +357,10 @@ footer .copy{border-top:1px solid color-mix(in srgb,var(--butter) 30%,transparen
 .diary.wide header{position:static;flex-direction:row;flex-wrap:wrap;align-items:baseline;column-gap:24px}
 .diary.wide header>div{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:20px}
 .diary.wide header small{flex-basis:100%}
-.diaries .diary .spread.bleed{grid-template-columns:minmax(0,1fr);gap:clamp(28px,4vw,48px)}
-.diaries .diary .spread.solo{grid-template-columns:1fr}
+.chapter .diary .spread.bleed{grid-template-columns:minmax(0,1fr);gap:clamp(28px,4vw,48px)}
+.chapter .diary .spread.solo{grid-template-columns:1fr}
 .spread.solo .feat:not(.bleed){max-width:620px}
-.diaries .diary:nth-child(even) .spread.solo .feat:not(.bleed){margin-left:auto}
+.chapter:nth-child(even) .diary .spread.solo .feat:not(.bleed){margin-left:auto}
 .prints.row{grid-template-columns:repeat(4,minmax(0,1fr));max-width:920px;width:100%;margin:0 auto}
 .pr.plain{padding:0;background:none;box-shadow:none}
 .pr.plain span{padding:8px 0 0}
@@ -422,6 +421,54 @@ footer .copy{border-top:1px solid color-mix(in srgb,var(--butter) 30%,transparen
 .vegc a{align-self:flex-start;margin-top:auto;font-family:var(--f-mono);font-size:15px;border:1.2px solid var(--ink);border-radius:999px;padding:6px 16px;text-decoration:none}
 .vegc a:hover{background:var(--ink);color:var(--butter)}
 
+/* 故事書：序、章節（底色慢慢遞進）、淡化背景、連貫的細線、隔天、尾聲 */
+.prologue,.chapter,.epilogue{position:relative;overflow:hidden}
+.fade{position:absolute;inset:0 0 auto;height:min(70vh,640px);background-size:cover;background-position:center;opacity:.2;filter:blur(2px) saturate(.7) sepia(.2);-webkit-mask-image:linear-gradient(#000 0%,transparent 100%);mask-image:linear-gradient(#000 0%,transparent 100%);pointer-events:none}
+.prologue{padding:clamp(88px,13vw,168px) 0 clamp(40px,6vw,72px);text-align:center}
+.prologue .fade{height:100%;opacity:.16;-webkit-mask-image:radial-gradient(ellipse at center,#000 10%,transparent 72%);mask-image:radial-gradient(ellipse at center,#000 10%,transparent 72%)}
+.prologue .wrap,.chapter .wrap,.epilogue .wrap{position:relative}
+.prologue h2{font-family:var(--f-serif);font-weight:700;font-size:clamp(26px,3.8vw,46px);line-height:1.6;margin:18px auto 0;max-width:20em}
+.prologue .pmemo{font-family:var(--f-serif);font-size:clamp(17px,1.8vw,21px);line-height:2;max-width:30em;margin:22px auto 0;white-space:pre-line}
+.prologue .sub{font-family:var(--f-mono);font-size:14px;color:var(--mute);margin-top:20px}
+.hand{font-family:var(--f-hand)}
+.prologue .go{font-size:22px;margin-top:clamp(40px,6vw,72px);color:var(--mute)}
+.chapter{padding:clamp(56px,8vw,104px) 0 0}
+.chapter .diary{padding-bottom:clamp(40px,6vw,72px)}
+.chapter .diary .num{font-family:var(--f-serif);font-style:normal;font-weight:900;font-size:clamp(40px,5vw,64px);letter-spacing:.06em;line-height:1.1}
+.chapter .diary small .hand{font-size:19px;color:var(--ink);letter-spacing:0}
+.bridge{display:flex;flex-direction:column;align-items:center;gap:10px;padding:8px 0 clamp(36px,5vw,56px);font-family:var(--f-hand);font-size:22px;color:var(--mute)}
+.bridge::before{content:"";width:1px;height:56px;background:linear-gradient(transparent,color-mix(in srgb,var(--ink) 35%,transparent))}
+@media (min-width:861px){
+  /* 每章左側一條細線串起來 */
+  .chapter:not(.scraps)::before{content:"";position:absolute;top:0;bottom:0;left:calc(max(16px,50vw - 620px) + var(--gut) + 6px);width:1px;background:color-mix(in srgb,var(--ink) 16%,transparent)}
+  .chapter .diary header{padding-left:28px}
+  .chapter .diary header::before{content:"";position:absolute;left:1px;top:.6em;width:11px;height:11px;border-radius:50%;background:var(--bg);border:1.5px solid var(--ink)}
+  .chapter .diary.wide header{position:relative;top:auto}
+}
+.scraps{padding-bottom:clamp(56px,8vw,96px)}
+.scraps-h{text-align:center;margin-bottom:clamp(28px,4vw,48px)}
+.scraps-h h3{font-family:var(--f-serif);font-weight:700;font-size:clamp(26px,3vw,36px);margin-top:8px}
+.scraps-h p{color:var(--mute);margin-top:6px}
+.epilogue{padding:clamp(72px,10vw,128px) 0}
+.epilogue .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(32px,6vw,88px);align-items:center}
+.epilogue .stack{position:relative;height:clamp(260px,30vw,380px)}
+.epilogue .stack .pr{position:absolute;width:56%;top:8%;left:6%;transform:rotate(var(--rot));cursor:default}
+.epilogue .stack .pr:nth-child(2){left:38%;top:0}
+.epilogue .stack .pr:nth-child(3){left:22%;top:30%}
+.epilogue h2{font-family:var(--f-serif);font-weight:700;font-size:clamp(28px,3.6vw,44px);line-height:1.4;margin-top:12px}
+.epilogue .sub{font-family:var(--f-mono);font-size:14px;color:var(--mute);margin-top:14px}
+.epilogue .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+
+/* 溫度與立體感：暖色陰影、相片微微傾斜，滑過會擺正 */
+.chapter .pr,.scraps .pr,.epilogue .pr{box-shadow:0 1px 2px rgba(80,55,30,.08),0 16px 30px -18px rgba(80,55,30,.5);transform:rotate(var(--rot,0deg));transition:transform .35s,box-shadow .35s}
+.chapter .pr:hover,.scraps .pr:hover{transform:rotate(0) translateY(-4px);box-shadow:0 2px 4px rgba(80,55,30,.1),0 24px 40px -18px rgba(80,55,30,.55)}
+.chapter .pr.plain{box-shadow:none}
+.chapter .pr.plain img{box-shadow:0 14px 26px -16px rgba(80,55,30,.55)}
+.chapter .feat.print,.chapter .feat.filmb{background:#FFFDF9;box-shadow:0 2px 3px rgba(80,55,30,.06),0 30px 60px -30px rgba(80,55,30,.45)}
+.chapter .feat.cap,.chapter .feat.blur{box-shadow:0 30px 60px -32px rgba(80,55,30,.5)}
+.chapter .film,.scraps .film,.epilogue .film{filter:saturate(.82) contrast(.95) brightness(1.04) sepia(.12)}
+.chapter .feat.bleed{box-shadow:none}
+
 /* 手機底部分頁列 */
 .tabbar{display:none}
 
@@ -449,6 +496,8 @@ footer .copy{border-top:1px solid color-mix(in srgb,var(--butter) 30%,transparen
   .diary header{position:static;flex-direction:row;flex-wrap:wrap;align-items:baseline;column-gap:16px}
   .diary header>div{flex:1;min-width:220px}
   .meetday{gap:14px}
+  .epilogue .wrap{grid-template-columns:minmax(0,1fr)}
+  .epilogue .stack{height:240px;max-width:360px;width:100%;margin:0 auto}
   .dayrow:nth-child(even) .ph{order:0}
   .side{position:static}
   .sec-h{grid-template-columns:1fr}
@@ -462,8 +511,8 @@ footer .copy{border-top:1px solid color-mix(in srgb,var(--butter) 30%,transparen
   .logo{padding:2px 14px 4px}
   .logo small{display:none}
   .trip .ph{aspect-ratio:4/3}
-  .spread,.diaries .diary:nth-child(even) .spread{grid-template-columns:minmax(0,1fr)}
-  .diaries .diary:nth-child(even) .feat{order:0}
+  .spread,.chapter:nth-child(even) .diary .spread{grid-template-columns:minmax(0,1fr)}
+  .chapter:nth-child(even) .diary .feat{order:0}
   .prints.many,.prints.row{grid-template-columns:repeat(2,minmax(0,1fr))}
   .feat.bleed img{max-height:70vh}
   .meetday .mr{padding:12px 16px;gap:14px}
@@ -690,14 +739,21 @@ function diaryPhotos(){
       const place = D.places.find(p => p.n === ph.p);
       day = hit ? hit.d.day : place ? (D.days.find(d => dayCfg(d.day).area === place.area) || {}).day : null;
     }
+    if (!day && !ph.p && ph.c){
+      const d = D.days.find(d => dayCfg(d.day).area && ph.c.includes(dayCfg(d.day).area));
+      if (d) day = d.day;
+    }
     (day ? byDay[day] : rest).push(ph);
   });
   // 每天的橫幅照片也放進當天（沒放過的話）
-  D.days.forEach(d => { const c = dayCfg(d.day); if (c.img && !byDay[d.day].some(p => p.n === c.img)) byDay[d.day].unshift({n:c.img, c:c.cap || '', pos:c.pos}); });
+  D.days.forEach(d => { const c = dayCfg(d.day); if (c.img){ const own = byDay[d.day].find(p => p.n === c.img); byDay[d.day] = [{...(own || {}), n:c.img, c:c.cap || (own || {}).c || '', pos:c.pos}, ...byDay[d.day].filter(p => p.n !== c.img)]; } });
   // 橫幅照片只留在自己那天，不在別天重複出現
   D.days.forEach(d => { const n = dayCfg(d.day).img; if (n) D.days.forEach(o => { if (o.day !== d.day) byDay[o.day] = byDay[o.day].filter(p => p.n !== n || dayCfg(o.day).img === n); }); });
   return {byDay, rest};
 }
+
+// 兩個顏色依比例混合（章節底色慢慢遞進用）
+const mixHex = (a, b, t) => '#' + [1, 3, 5].map(i => Math.round(parseInt(a.substr(i, 2), 16) * (1 - t) + parseInt(b.substr(i, 2), 16) * t).toString(16).padStart(2, '0')).join('');
 
 // 照片長寬比：讀過就記住，用來決定滿版或留白
 const DIMS = {};
@@ -713,7 +769,8 @@ function loadDims(ns){
 // 一天的照片日記：橫向主照片滿版（不加框），直向主照片留白並輪流用相片處理；小照片混搭無框、白邊、黑框
 const FRAMES = ['print', 'filmb', 'blur', 'cap'];
 const PRINTS = ['plain', 'mat', 'mat fb'];
-const printCard = (ph, i, k) => `<button type="button" class="pr ${PRINTS[k % 3]}" data-ph="${i}" aria-label="放大照片：${esc(ph.c)}"><img class="film" src="${imgSrc('t', ph.n)}" alt="${esc(ph.c)}" loading="lazy"><span>${esc(ph.c || ' ')}</span></button>`;
+const TILTS = [-1.6, 1.2, -0.7, 1.8, -1.1, 0.8];
+const printCard = (ph, i, k) => `<button type="button" class="pr ${PRINTS[k % 3]}" style="--rot:${TILTS[(i + k) % TILTS.length]}deg" data-ph="${i}" aria-label="放大照片：${esc(ph.c)}"><img class="film" src="${imgSrc('t', ph.n)}" alt="${esc(ph.c)}" loading="lazy"><span>${esc(ph.c || ' ')}</span></button>`;
 function diarySpread(list, start, kind, stamp){
   const [f, ...others] = list, bleed = kind === 'bleed';
   const src = imgSrc('f', f.n), small = others.slice(0, 4), more = others.length - small.length;
@@ -847,8 +904,14 @@ function renderTrip(){
   quotes = [];
 
   if (!plan){
-    // 已結束的旅程：照片日記為主，行程只留精簡清單
+    // 已結束的旅程：像一本故事書——序、每天一章（底色從暖米慢慢轉成傍晚的霧藍）、零碎的片段、尾聲
     const {byDay, rest} = diaryPhotos();
+    const n = D.days.length;
+    const zh = k => '零一二三四五六七八九十'[k] || String(k);
+    const tone = i => mixHex('#F8F0E3', '#E3E9EC', n > 1 ? i / (n - 1) : 0);
+    const areas = [...new Set(D.days.map(d => dayCfg(d.day).area).filter(Boolean))];
+    const areaText = areas.length > 1 ? areas.slice(0, -1).join('、') + '和' + areas[areas.length - 1] : areas[0] || '';
+    const storyLine = `一家${zh(+SITE.people || 4)}口，${zh(n)}天${areaText ? `，走過${areaText}` : ''}。`;
     let all = [];
     const diaryHtml = () => {
       const plan = arrangeDiary(D.days.map(d => byDay[d.day]));
@@ -856,35 +919,63 @@ function renderTrip(){
       return D.days.map((d, i) => {
         const c = dayCfg(d.day), {list, kind} = plan[i], start = all.length;
         all.push(...list);
-        return `<article class="diary${kind === 'bleed' ? ' wide' : ''}">
-          <header>
-            <p class="num">${String(d.day).padStart(2, '0')}</p>
-            <div>
-              <small>DAY ${d.day}・${esc(d.date)}${c.area ? '・' + esc(c.area) : ''}</small>
-              <h3>${esc(d.title)}</h3>
-              ${c.memo ? `<p class="dmemo">${esc(c.memo)}</p>` : ''}
-              <a class="more" href="#${T()}-day-${d.day}">當天的行程</a>
-            </div>
-          </header>
-          ${list.length ? diarySpread(list, start, kind, `Day ${d.day} · ${String(d.date).split(/\s|（|\(/)[0]}`) : '<p class="dnone">這天還沒有照片</p>'}
-        </article>`;
+        const back = list[0] ? imgSrc('f', list[0].n) : '';
+        return `<section class="chapter${kind === 'bleed' ? ' wide' : ''}" style="background:${tone(i)}">
+          ${back ? `<div class="fade" style="background-image:url('${back}')"></div>` : ''}
+          <div class="wrap"><article class="diary${kind === 'bleed' ? ' wide' : ''}">
+            <header>
+              <p class="num">第${zh(d.day)}天</p>
+              <div>
+                <small><span class="hand">Chapter ${String(d.day).padStart(2, '0')}</span>　${esc(d.date)}${c.area ? '・' + esc(c.area) : ''}</small>
+                <h3>${esc(d.title)}</h3>
+                ${c.memo ? `<p class="dmemo">${esc(c.memo)}</p>` : ''}
+                <a class="more" href="#${T()}-day-${d.day}">當天的行程</a>
+              </div>
+            </header>
+            ${list.length ? diarySpread(list, start, kind, `Day ${d.day} · ${String(d.date).split(/\s|（|\(/)[0]}`) : '<p class="dnone">這天還沒有照片</p>'}
+          </article></div>
+          ${i < n - 1 ? '<p class="bridge"><span>隔天</span></p>' : ''}
+        </section>`;
       }).join('');
     };
     // 照片庫沒記錄長寬比的（剛上傳的），先讀主照片尺寸
-    const feats = D.days.map(d => byDay[d.day][0]).filter(Boolean).map(p => p.n).filter(n => !ratioOf(n));
+    const feats = D.days.map(d => byDay[d.day][0]).filter(Boolean).map(p => p.n).filter(k => !ratioOf(k));
     const ready = !feats.length;
     const diaryBody = ready ? diaryHtml() : '';
-    const restStart = D.days.reduce((n, d) => n + byDay[d.day].length, 0);
+    const restStart = D.days.reduce((k, d) => k + byDay[d.day].length, 0);
+    const total = restStart + rest.length;
+    const next = sortedTrips().find(t => t.status === 'planning' && t.id !== trip.id);
+    const ending = [byDay[D.days.length] && byDay[D.days.length][0], byDay[1] && byDay[1][0], rest[0]].filter(Boolean);
     app.innerHTML = hero + `
     ${facts ? `<div class="facts">${facts}</div>` : ''}
-    ${memo}
-    ${D.days.length ? `<section class="sec" id="diary" style="scroll-margin-top:var(--navh)"><div class="wrap">
-      <div class="sec-h"><div><p class="kicker">Photo Diary</p><h2>每日照片日記</h2></div><p>${restStart + rest.length} 張照片，依天數排好。點照片可以放大，左右滑看下一張。</p></div>
-      <div class="diaries" id="diaries">${diaryBody}</div>
-      ${rest.length ? `<div class="diary rest"><header><p class="num">+</p><div><small>MORE</small><h3>其他照片</h3></div></header>${diarySpread(rest, restStart, 'print', 'More')}</div>` : ''}
-    </div></section>` : empty}
+    ${n ? `<section class="prologue" id="diary" style="background:${tone(0)};scroll-margin-top:var(--navh)">
+      ${SITE.hero.img ? `<div class="fade" style="background-image:url('${imgSrc('f', SITE.hero.img)}')"></div>` : ''}
+      <div class="wrap">
+        <p class="kicker">Prologue · 序</p>
+        <h2>${esc(storyLine)}</h2>
+        ${SITE.memo ? `<p class="pmemo">${esc(SITE.memo)}</p>` : ''}
+        <p class="sub">${esc(D.info.subtitle)}・${total} 張照片</p>
+        <p class="hand go">從第一天開始，慢慢往下看 ↓</p>
+      </div>
+    </section>
+    <div id="diaries">${diaryBody}</div>
+    ${rest.length ? `<section class="chapter scraps" style="background:${tone(n - 1)}"><div class="wrap">
+      <header class="scraps-h"><p class="kicker">Fragments</p><h3>旅途中的小片段</h3><p>沒有排進哪一天，但也想留下來的照片。</p></header>
+      <div class="prints many">${rest.map((ph, k) => printCard(ph, restStart + k, k)).join('')}</div>
+    </div></section>` : ''}
+    <section class="epilogue" style="background:${tone(n - 1)}">
+      <div class="wrap">
+        ${ending.length ? `<div class="stack">${ending.map((ph, k) => `<span class="pr mat" style="--rot:${[-5, 3, -1][k]}deg"><img class="film" src="${imgSrc('t', ph.n)}" alt="" loading="lazy"></span>`).join('')}</div>` : ''}
+        <div class="tx">
+          <p class="kicker">Epilogue · 尾聲</p>
+          <h2>${esc(trip.name)}，就收在這裡。</h2>
+          <p class="sub">${n} 天・${D.places.length} 個地方・${total} 張照片</p>
+          <div class="acts">${next ? `<a class="btn" href="#t-${next.id}">下一站：${esc(next.name)} →</a>` : ''}<a class="btn ghost" href="#trips" data-home="1">翻其他旅程</a></div>
+        </div>
+      </div>
+    </section>` : empty}
     ${placesSec}
-    ${D.days.length ? `<section class="sec" style="padding-top:0"><div class="wrap">
+    ${n ? `<section class="sec" style="padding-top:0"><div class="wrap">
       <div class="sec-h"><div><p class="kicker">Itinerary</p><h2>當時的行程</h2></div><p>${esc(SITE.route || D.info.subtitle)}</p></div>
       <div class="dlist">${D.days.map(d => `<a href="#${T()}-day-${d.day}"><span class="n">${String(d.day).padStart(2, '0')}</span><span><small>${esc(d.date)}</small><b>${esc(d.title)}</b></span><span class="go">→</span></a>`).join('')}</div>
     </div></section>` : ''}

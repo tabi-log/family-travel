@@ -968,48 +968,23 @@ window.TRIP_DATA = {
      {
       "day": 2,
       "date": "7/20 (一)",
-      "title": "鼓浪嶼",
+      "title": "廈門園林植物園",
       "notes": [],
       "items": [
        {
-        "time": "09:00",
+        "time": "",
         "until": "",
-        "event": "集合：本島接上車（跟團）",
-        "kind": "key"
-       },
-       {
-        "time": "09:00",
-        "until": "16:00",
-        "event": "鼓浪嶼跟團：日光岩、萬國建築、龍頭路、大德記沙灘",
+        "event": "廈門園林植物園：多肉植物區、雨林世界",
         "kind": ""
        },
        {
-        "time": "解散",
-        "until": "18:00",
-        "event": "自由時間：龍頭路（葉氏麻糍、林記正素餅）",
-        "kind": ""
-       },
-       {
-        "time": "18:00",
+        "time": "",
         "until": "",
-        "event": "三丘田碼頭搭夜航船回輪渡碼頭",
-        "kind": "key"
-       },
-       {
-        "time": "19:00",
-        "until": "",
-        "event": "逛中山路／八市（備案）",
+        "event": "萬石山 眺望海景與廈門天際線",
         "kind": ""
        }
       ],
-      "transfers": [
-       {
-        "leg": "三丘田碼頭 → 輪渡碼頭",
-        "way": "夜航船，晚上唯一航線，下船就是中山路",
-        "time": "",
-        "cost": 0
-       }
-      ]
+      "transfers": []
      },
      {
       "day": 3,
@@ -1355,51 +1330,6 @@ window.TRIP_DATA = {
       "res": false
      },
      {
-      "n": "鼓浪嶼",
-      "area": "鼓浪嶼",
-      "t": "see",
-      "tag": "跟團",
-      "desc": "日光岩眺望、萬國建築、龍頭路、大德記沙灘；結束時間導遊前一晚確認。",
-      "map": "https://www.google.com/maps/search/%E9%BC%93%E6%B5%AA%E5%B6%BC",
-      "res": false
-     },
-     {
-      "n": "三丘田碼頭",
-      "area": "鼓浪嶼",
-      "t": "see",
-      "tag": "碼頭",
-      "desc": "晚上唯一航線：三丘田 ↔ 輪渡碼頭，下船就是中山路。",
-      "map": "https://www.google.com/maps/search/%E4%B8%89%E4%B8%98%E7%94%B0%E7%A2%BC%E9%A0%AD%20%E9%BC%93%E6%B5%AA%E5%B6%BC",
-      "res": false
-     },
-     {
-      "n": "葉氏麻糍",
-      "area": "鼓浪嶼",
-      "t": "eat",
-      "tag": "小吃",
-      "desc": "🌱 媽媽可吃。花生芝麻糯米糍。",
-      "map": "https://www.google.com/maps/search/%E8%91%89%E6%B0%8F%E9%BA%BB%E7%B3%8D%20%E9%BC%93%E6%B5%AA%E5%B6%BC",
-      "res": false
-     },
-     {
-      "n": "林記正素餅",
-      "area": "鼓浪嶼",
-      "t": "eat",
-      "tag": "小吃",
-      "desc": "🌱 媽媽可吃。手工素餅。",
-      "map": "https://www.google.com/maps/search/%E6%9E%97%E8%A8%98%E6%AD%A3%E7%B4%A0%E9%A4%85%20%E9%BC%93%E6%B5%AA%E5%B6%BC",
-      "res": false
-     },
-     {
-      "n": "黃玉蘭魚丸／林氏蚵仔煎／蛋滿灌／林氏沙茶麵",
-      "area": "鼓浪嶼",
-      "t": "eat",
-      "tag": "小吃",
-      "desc": "✕ 海鮮或肉類，媽媽不能吃。",
-      "map": "https://www.google.com/maps/search/%E9%BE%8D%E9%A0%AD%E8%B7%AF%20%E9%BC%93%E6%B5%AA%E5%B6%BC",
-      "res": false
-     },
-     {
       "n": "一樹一葉",
       "area": "飲料・伴手禮",
       "t": "eat",
@@ -1533,6 +1463,15 @@ window.TRIP_DATA = {
       "desc": "✕ 粥裡有肉，媽媽不能吃。后浦老字號，配油條。",
       "map": "https://www.google.com/maps/search/%E5%82%B3%E8%A8%98%E5%BB%A3%E6%9D%B1%E7%B2%A5%20%E9%87%91%E9%96%80",
       "res": false
+     },
+     {
+      "n": "廈門園林植物園",
+      "area": "植物園",
+      "t": "see",
+      "tag": "植物園",
+      "desc": "多肉植物區、雨林世界的霧氣，還有萬石山上眺望海景。",
+      "map": "https://www.google.com/maps/search/%E5%BB%88%E9%96%80%E5%9C%92%E6%9E%97%E6%A4%8D%E7%89%A9%E5%9C%92",
+      "res": false
      }
     ],
     "areaOrder": [
@@ -1541,14 +1480,14 @@ window.TRIP_DATA = {
      "南普陀寺",
      "沙坡尾",
      "退化公園",
-     "鼓浪嶼",
+     "植物園",
      "飲料・伴手禮"
     ]
    },
    "S": {
     "code": "XMN · 廈門",
     "kicker": "KHH → KNH → XMN · TRIP 02",
-    "route": "高雄 → 金門 → 廈門 → 鼓浪嶼",
+    "route": "高雄 → 金門 → 廈門 → 植物園",
     "people": 4,
     "cur": "¥",
     "card": {
@@ -1586,27 +1525,14 @@ window.TRIP_DATA = {
       "foot": ""
      },
      "2": {
-      "short": "鼓浪嶼",
-      "area": "鼓浪嶼",
-      "img": "13",
-      "cap": "中山路老街夜晚",
-      "pos": 55,
-      "hint": "龍頭路小吃・三丘田碼頭等",
-      "must": [
-       [
-        "09:00",
-        "本島接上車（跟團）"
-       ],
-       [
-        "18:00",
-        "三丘田碼頭搭夜航船"
-       ]
-      ],
-      "tips": [
-       "跟團結束時間要等導遊前一晚確認",
-       "龍頭路媽媽可吃：葉氏麻糍、林記正素餅",
-       "夜航船只有三丘田 ↔ 輪渡碼頭這一條，下船就是中山路"
-      ],
+      "short": "植物園",
+      "area": "植物園",
+      "img": "23",
+      "cap": "園林植物園 雨林霧氣",
+      "pos": 50,
+      "hint": "多肉植物區・雨林世界・萬石山",
+      "must": [],
+      "tips": [],
       "foot": ""
      },
      "3": {
@@ -1679,12 +1605,6 @@ window.TRIP_DATA = {
       "cap": "",
       "days": "DAY 3"
      },
-     "鼓浪嶼": {
-      "id": "gulangyu",
-      "img": "",
-      "cap": "",
-      "days": "DAY 2"
-     },
      "飲料・伴手禮": {
       "id": "gifts",
       "img": "12",
@@ -1696,6 +1616,12 @@ window.TRIP_DATA = {
       "img": "33",
       "cap": "金門古樸小鎮",
       "days": "DAY 1・4"
+     },
+     "植物園": {
+      "id": "garden",
+      "img": "19",
+      "cap": "多肉植物區",
+      "days": "DAY 2"
      }
     },
     "info": [
@@ -1807,14 +1733,14 @@ window.TRIP_DATA = {
    "n": "02",
    "c": "咖啡店的插畫牆",
    "p": null,
-   "trip": null,
+   "trip": "xiamen2026",
    "r": 0.75
   },
   {
    "n": "03",
    "c": "中山路巷弄夜晚",
    "p": null,
-   "trip": null,
+   "trip": "xiamen2026",
    "r": 0.75
   },
   {
@@ -1841,15 +1767,15 @@ window.TRIP_DATA = {
   {
    "n": "07",
    "c": "金門大橋與海岸",
-   "p": null,
-   "trip": null,
+   "p": "金門大橋",
+   "trip": "xiamen2026",
    "r": 1.33
   },
   {
    "n": "08",
    "c": "紅磚老屋街區（夜）",
    "p": null,
-   "trip": null,
+   "trip": "xiamen2026",
    "r": 1.33
   },
   {
@@ -1863,7 +1789,7 @@ window.TRIP_DATA = {
    "n": "10",
    "c": "咖啡店的樓梯",
    "p": null,
-   "trip": null,
+   "trip": "xiamen2026",
    "r": 0.75
   },
   {
@@ -1891,7 +1817,7 @@ window.TRIP_DATA = {
    "n": "14",
    "c": "瑞幸咖啡 中山路店",
    "p": null,
-   "trip": null,
+   "trip": "xiamen2026",
    "r": 0.75
   },
   {
@@ -1912,7 +1838,7 @@ window.TRIP_DATA = {
    "n": "17",
    "c": "廈門 綠牆大字",
    "p": null,
-   "trip": null,
+   "trip": "xiamen2026",
    "r": 1
   },
   {
@@ -1925,8 +1851,8 @@ window.TRIP_DATA = {
   {
    "n": "19",
    "c": "園林植物園 多肉植物區",
-   "p": null,
-   "trip": null,
+   "p": "廈門園林植物園",
+   "trip": "xiamen2026",
    "r": 1.33
   },
   {
@@ -1953,29 +1879,29 @@ window.TRIP_DATA = {
   {
    "n": "23",
    "c": "園林植物園 雨林霧氣",
-   "p": null,
-   "trip": null,
+   "p": "廈門園林植物園",
+   "trip": "xiamen2026",
    "r": 0.75
   },
   {
    "n": "24",
    "c": "萬石山 眺望海景",
-   "p": null,
-   "trip": null,
+   "p": "廈門園林植物園",
+   "trip": "xiamen2026",
    "r": 1.33
   },
   {
    "n": "25",
    "c": "廈門園林植物園 石牆題字",
-   "p": null,
-   "trip": null,
+   "p": "廈門園林植物園",
+   "trip": "xiamen2026",
    "r": 1.33
   },
   {
    "n": "26",
    "c": "咖啡店 樓梯照片牆",
    "p": null,
-   "trip": null,
+   "trip": "xiamen2026",
    "r": 0.75
   },
   {
@@ -1989,7 +1915,7 @@ window.TRIP_DATA = {
    "n": "28",
    "c": "曾家臭豆腐",
    "p": null,
-   "trip": null,
+   "trip": "xiamen2026",
    "r": 1.33
   },
   {
@@ -2003,14 +1929,14 @@ window.TRIP_DATA = {
    "n": "30",
    "c": "三分天注定 福建茶鋪",
    "p": null,
-   "trip": null,
+   "trip": "xiamen2026",
    "r": 0.75
   },
   {
    "n": "31",
    "c": "爺爺不泡茶 空山梔子",
    "p": null,
-   "trip": null,
+   "trip": "xiamen2026",
    "r": 0.75
   },
   {
@@ -2080,7 +2006,7 @@ window.TRIP_DATA = {
    "n": "41",
    "c": "遠眺廈門天際線",
    "p": null,
-   "trip": null,
+   "trip": "xiamen2026",
    "r": 1.33
   },
   {
@@ -2122,14 +2048,14 @@ window.TRIP_DATA = {
    "n": "47",
    "c": "100 円自動販賣機",
    "p": null,
-   "trip": null,
+   "trip": "osaka2025",
    "r": 0.75
   },
   {
    "n": "48",
    "c": "大阪地鐵車廂",
    "p": null,
-   "trip": null,
+   "trip": "osaka2025",
    "r": 0.75
   },
   {
@@ -2430,7 +2356,7 @@ window.TRIP_DATA = {
    "n": "91",
    "c": "がんこ 三条本店",
    "p": null,
-   "trip": null,
+   "trip": "osaka2025",
    "r": 0.75
   },
   {
