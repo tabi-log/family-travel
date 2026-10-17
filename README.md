@@ -29,7 +29,7 @@
 
 ## 檔案說明
 
-- `index.html`：網站頁面與版型
+- `index.html`：網站頁面與版型（海霧藍配色；標題用思源宋體＋Source Serif 4，內文用思源黑體＋Source Code Pro）
 - `admin.html`：後台
 - `data.js`：所有旅程的資料（SITE 首頁設定、TRIPS 各趟旅程、PHOTOS 照片庫）
 - `photos/`：照片（`f` 開頭是大圖，`t` 開頭是縮圖）
